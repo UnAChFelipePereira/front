@@ -1,7 +1,8 @@
 .login.login-v1 {
 	min-height: 100vh;
 	width: 100%;
-	background-image: var(--#{$prefix}app-login-bg-cover);
+	$imagen-url: '/assets/img/subir/22593.jpg';
+	background-image: url($imagen-url);
 	background-size: cover;
 	display: flex;
 	align-items: center;
@@ -230,156 +231,84 @@
 	}
 }
 .login.login-with-news-feed,
+
 .register.register-with-news-feed {
-	min-height: 100vh;
-	
-	& .news-feed {
-		position: fixed;
-		left: 0;
-		right: $login-register-news-feed-container-width;
-		top: 0;
-		bottom: 0;
-		overflow: hidden;
-		transform: translateZ(0);
-		
-		@if $enable-rtl {
-			right: 0;
-			left: rem(500px);
-		}
-		@include media-breakpoint-down(lg) {
-			right: $login-register-news-feed-container-width-sm;
-			
-			@if $enable-rtl {
-				right: 0;
-				left: $login-register-news-feed-container-width-sm;
-			}	
-		}
-		@include media-breakpoint-down(md) {
-			display: none;
-		}
-		& .news-image {
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			top: 0;
-			background-size: cover;
-			background-repeat: no-repeat;
-			background-position: center;
-		}
-		& .news-caption {
-			color: rgba($white, .85);
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			padding: rem(60px) rem(60px) rem(45px);
-			font-size: rem(18px);
-			letter-spacing: rem(0.25px);
-			z-index: 20;
-			font-weight: 300;
-			background: linear-gradient(to bottom, (rgba($black, 0) 0%, rgba($black, 1) 100%));
-			
-			@include media-breakpoint-down(lg) {
-				padding: rem(45px) rem(45px) rem(30px);
-				font-size: rem(16px);
-			}
-			
-			& .caption-title {
-				font-weight: 300;
-				color: $white;
-				font-size: rem(36px);
-			
-				@include media-breakpoint-down(lg) {
-					font-size: rem(28px);
-				}
-			}
-		}
-	}
-	& .login-container,
-	& .register-container {
-		width: $login-register-news-feed-container-width;
-		background: var(--#{$prefix}component-bg);
-		padding: rem(60px);
-		min-height: 100vh;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		
-		@if $enable-rtl {
-			margin-right: auto;
-		} @else {
-			margin-left: auto;
-		}
-		@include media-breakpoint-down(lg) {
-			padding: rem(45px);
-			width: $login-register-news-feed-container-width-sm;
-		}
-		@include media-breakpoint-down(md) {
-			width: auto;
-			padding: rem(30px);
-		}
-	}
-	& .login-header {
-		position: relative;
-		display: flex;
-		align-items: center;
-	
-		& .brand {
-			padding: 0;
-			font-size: rem(28px);
-			color: var(--#{$prefix}component-color);
-			font-weight: 300;
-			flex: 1;
-			
-			@include media-breakpoint-down(md) {
-				font-size: rem(22px);
-			}
-	
-			& .logo {
-				width: rem(36px);
-				height: rem(36px);
-				font-size: rem(36px);
-				border-radius: $border-radius-lg;
-		
-				@if $enable-rtl {
-					margin-left: rem(10px);
-				} @else {
-					margin-right: rem(10px);
-				}
-				@include media-breakpoint-down(md) {
-					width: rem(24px);
-					height: rem(24px);
-					font-size: rem(24px);
-				}
-				& > * {
-					display: block;
-				}
-			}
-			& small {
-				font-size: rem(14px);
-				display: block;
-				color: rgba(var(--#{$prefix}component-color-rgb), .5);
-				font-weight: $font-weight-normal;
-			
-				@include media-breakpoint-down(md) {
-					font-size: rem(13px);
-				}
-			}
-		}
-		& .icon {
-			color: rgba(var(--#{$prefix}component-color-rgb), .25);
-		
-			& i {
-				font-size: rem(64px);
-				
-				@include media-breakpoint-down(md) {
-					font-size: rem(52px);
-				}
-			}
-		}
-	}
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & .login-container,
+    & .register-container {
+        max-width: $login-v2-container-width; // Ajusta el ancho máximo según tus necesidades
+        padding: 0 rem(20px); // Ajusta el padding interno como lo tienes en el login
+        position: relative;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    & .login-header {
+        margin-bottom: rem(20px);
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        & .brand {
+            padding: 0;
+            font-size: rem(28px);
+            font-weight: 300;
+            flex: 1;
+
+            & .logo {
+                width: rem(36px);
+                height: rem(36px);
+                font-size: rem(36px);
+                position: relative;
+
+                @if $enable-rtl {
+                    margin-left: $spacer * 0.75;
+                } @else {
+                    margin-right: $spacer * 0.75;
+                }
+                @include media-breakpoint-down(md) {
+                    width: rem(24px);
+                    height: rem(24px);
+                    font-size: rem(24px);
+                }
+
+                & > * {
+                    display: block;
+                }
+            }
+            & small {
+                font-size: rem(13px);
+                display: block;
+                opacity: 0.5;
+                font-weight: $font-weight-bold;
+
+                @include media-breakpoint-down(md) {
+                    font-size: rem(12px);
+                    color: $gray-500;
+                }
+            }
+        }
+        & .icon {
+            opacity: 0.75;
+
+            & i {
+                font-size: rem(56px);
+
+                @include media-breakpoint-down(md) {
+                    font-size: rem(48px);
+                }
+            }
+        }
+    }
 }
+
 
 .login-cover {
 	position: fixed;
@@ -453,4 +382,10 @@
 			}
 		}
 	}
+}
+
+.register-container {
+    background-color: rgba(255, 255, 255, 0.2); /* Blanco con opacidad del 20% */
+    padding: 20px; /* Ajusta el padding según sea necesario */
+    border-radius: 10px; /* Añade bordes redondeados si deseas */
 }

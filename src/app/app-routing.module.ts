@@ -2,6 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
+//import { LoginComponent } from './login/login.component';
+//import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthGuard } from './guards/auth.guard';
+import { AuthService } from './components/auth/auth.service';
+
+
+
+
 // Dashboard
 import { DashboardV1Page }          from './pages/dashboard/v1/dashboard-v1';
 import { DashboardV2Page }          from './pages/dashboard/v2/dashboard-v2';
@@ -106,6 +114,7 @@ import { ExtraSettingsPage }        from './pages/extra/extra-settings-page/extr
 import { LoginV1Page }              from './pages/login/login-v1/login-v1';
 import { LoginV2Page }              from './pages/login/login-v2/login-v2';
 import { LoginV3Page }              from './pages/login/login-v3/login-v3';
+import { RegisterV2Page }           from './pages/register/register-v3/register-v2';
 import { RegisterV3Page }           from './pages/register/register-v3/register-v3';
 
 // Helper
@@ -115,109 +124,112 @@ import { HelperCssPage }            from './pages/helper/helper-css/helper-css';
 import { ErrorPage }                from './pages/error/error';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard/v3', pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: 'login', component: LoginV1Page},
+  { path: 'register', component: RegisterV2Page },
+  { path: 'dashboard', component: DashboardV1Page, canActivate: [AuthService] },
+  
+  { path: 'dashboard/v1', component: DashboardV1Page, data: { title: 'Dashboard V1'},canActivate: [AuthService] },
+  { path: 'dashboard/v2', component: DashboardV2Page, data: { title: 'Dashboard V2'},canActivate: [AuthService]  },
+  { path: 'dashboard/v3', component: DashboardV3Page, data: { title: 'Dashboard V3'},canActivate: [AuthService] },
+  
+  { path: 'email/inbox', component: EmailInboxPage, data: { title: 'Email Inbox'}, canActivate: [AuthService]},
+  { path: 'email/compose', component: EmailComposePage, data: { title: 'Email Compose'},  canActivate: [AuthService] },
+  { path: 'email/detail', component: EmailDetailPage, data: { title: 'Email Detail'},canActivate: [AuthService]   },
+
+  { path: 'widget', component: WidgetPage, data: { title: 'Widgets'}, canActivate: [AuthService]  },
+  
+  { path: 'ui/general', component: UIGeneralPage, data: { title: 'UI General'}, canActivate: [AuthService]  },
+  { path: 'ui/typography', component: UITypographyPage, data: { title: 'UI Typography'},  canActivate: [AuthService] },
+  { path: 'ui/tabs-accordions', component: UITabsAccordionsPage, data: { title: 'UI Tabs & Accordions'}, canActivate: [AuthService]  },
+  { path: 'ui/modal-notification', component: UIModalNotificationPage, data: { title: 'UI Modal & Notification'}, canActivate: [AuthService]  },
+  { path: 'ui/widget-boxes', component: UIWidgetBoxesPage, data: { title: 'UI Widget Boxes'},  canActivate: [AuthService] },
+  { path: 'ui/media-object', component: UIMediaObjectPage, data: { title: 'UI Media Object'}, canActivate: [AuthService]  },
+  { path: 'ui/buttons', component: UIButtonsPage, data: { title: 'UI Buttons'},   },
+  { path: 'ui/icon-fontawesome', component: UIIconFontAwesomePage, data: { title: 'UI FontAwesome Icon'}, canActivate: [AuthService]  },
+  { path: 'ui/icon-duotone', component: UIIconDuotonePage, data: { title: 'UI Duotone Icon'}, canActivate: [AuthService]  },
+  { path: 'ui/icon-simple-line-icons', component: UIIconSimpleLineIconsPage, data: { title: 'UI SimpleLineIcons'}, canActivate: [AuthService]  },
+  { path: 'ui/icon-bootstrap', component: UIIconBootstrapPage, data: { title: 'UI Bootstrap'}, canActivate: [AuthService]  },
+  { path: 'ui/language-icon', component: UILanguageIconPage, data: { title: 'UI Language Bar Icon'},   canActivate: [AuthService]},
+  { path: 'ui/social-buttons', component: UISocialButtonsPage, data: { title: 'UI Social Buttons'}, canActivate: [AuthService]  },
+
+  { path: 'bootstrap-5', component: Bootstrap5Page, data: { title: 'Bootstrap 5'},canActivate: [AuthService]   },
+
+  { path: 'form/elements', component: FormElementsPage, data: { title: 'Form Elements'},  canActivate: [AuthService] },
+  { path: 'form/wizards', component: FormWizardsPage, data: { title: 'Form Wizards'},canActivate: [AuthService]   },
+  { path: 'form/plugins', component: FormPluginsPage, data: { title: 'Form Plugins'},canActivate: [AuthService]   },
+  
+  { path: 'table/basic', component: TableBasicPage, data: { title: 'Basic Tables'}, canActivate: [AuthService]  },
+  { path: 'table/data', component: TableDataPage, data: { title: 'Ngx DataTable'}, canActivate: [AuthService]  },
 	
-  { path: 'dashboard/v1', component: DashboardV1Page, data: { title: 'Dashboard V1'} },
-  { path: 'dashboard/v2', component: DashboardV2Page, data: { title: 'Dashboard V2'} },
-  { path: 'dashboard/v3', component: DashboardV3Page, data: { title: 'Dashboard V3'} },
+  { path: 'pos/counter-checkout', component: PosCounterCheckoutPage, data: { title: 'POS - Counter Checkout'}, canActivate: [AuthService]  },
+  { path: 'pos/kitchen-order', component: PosKitchenOrderPage, data: { title: 'POS - Kitchen Order'}, canActivate: [AuthService]  },
+  { path: 'pos/customer-order', component: PosCustomerOrderPage, data: { title: 'POS - Customer Order'}, canActivate: [AuthService]  },
+  { path: 'pos/menu-stock', component: PosMenuStockPage, data: { title: 'POS - Menu Stock'}, canActivate: [AuthService]},
+  { path: 'pos/table-booking', component: PosTableBookingPage, data: { title: 'POS - Table Booking'}, canActivate: [AuthService]  },
   
-  { path: 'email/inbox', component: EmailInboxPage, data: { title: 'Email Inbox'} },
-  { path: 'email/compose', component: EmailComposePage, data: { title: 'Email Compose'} },
-  { path: 'email/detail', component: EmailDetailPage, data: { title: 'Email Detail'} },
-
-  { path: 'widget', component: WidgetPage, data: { title: 'Widgets'} },
-  
-  { path: 'ui/general', component: UIGeneralPage, data: { title: 'UI General'} },
-  { path: 'ui/typography', component: UITypographyPage, data: { title: 'UI Typography'} },
-  { path: 'ui/tabs-accordions', component: UITabsAccordionsPage, data: { title: 'UI Tabs & Accordions'} },
-  { path: 'ui/modal-notification', component: UIModalNotificationPage, data: { title: 'UI Modal & Notification'} },
-  { path: 'ui/widget-boxes', component: UIWidgetBoxesPage, data: { title: 'UI Widget Boxes'} },
-  { path: 'ui/media-object', component: UIMediaObjectPage, data: { title: 'UI Media Object'} },
-  { path: 'ui/buttons', component: UIButtonsPage, data: { title: 'UI Buttons'} },
-  { path: 'ui/icon-fontawesome', component: UIIconFontAwesomePage, data: { title: 'UI FontAwesome Icon'} },
-  { path: 'ui/icon-duotone', component: UIIconDuotonePage, data: { title: 'UI Duotone Icon'} },
-  { path: 'ui/icon-simple-line-icons', component: UIIconSimpleLineIconsPage, data: { title: 'UI SimpleLineIcons'} },
-  { path: 'ui/icon-bootstrap', component: UIIconBootstrapPage, data: { title: 'UI Bootstrap'} },
-  { path: 'ui/language-icon', component: UILanguageIconPage, data: { title: 'UI Language Bar Icon'} },
-  { path: 'ui/social-buttons', component: UISocialButtonsPage, data: { title: 'UI Social Buttons'} },
-
-  { path: 'bootstrap-5', component: Bootstrap5Page, data: { title: 'Bootstrap 5'} },
-
-  { path: 'form/elements', component: FormElementsPage, data: { title: 'Form Elements'} },
-  { path: 'form/wizards', component: FormWizardsPage, data: { title: 'Form Wizards'} },
-  { path: 'form/plugins', component: FormPluginsPage, data: { title: 'Form Plugins'} },
-  
-  { path: 'table/basic', component: TableBasicPage, data: { title: 'Basic Tables'} },
-  { path: 'table/data', component: TableDataPage, data: { title: 'Ngx DataTable'} },
-	
-  { path: 'pos/counter-checkout', component: PosCounterCheckoutPage, data: { title: 'POS - Counter Checkout'} },
-  { path: 'pos/kitchen-order', component: PosKitchenOrderPage, data: { title: 'POS - Kitchen Order'} },
-  { path: 'pos/customer-order', component: PosCustomerOrderPage, data: { title: 'POS - Customer Order'} },
-  { path: 'pos/menu-stock', component: PosMenuStockPage, data: { title: 'POS - Menu Stock'} },
-  { path: 'pos/table-booking', component: PosTableBookingPage, data: { title: 'POS - Table Booking'} },
-  
-  { path: 'chart/ngx', component: ChartNgxPage, data: { title: 'Chart Ngx'} },
-  { path: 'chart/apex', component: ChartApexPage, data: { title: 'Chart Apex'} },
-  { path: 'chart/js', component: ChartJsPage, data: { title: 'Chart JS'} },
+  { path: 'chart/ngx', component: ChartNgxPage, data: { title: 'Chart Ngx'}, canActivate: [AuthService]  },
+  { path: 'chart/apex', component: ChartApexPage, data: { title: 'Chart Apex'}, canActivate: [AuthService]  },
+  { path: 'chart/js', component: ChartJsPage, data: { title: 'Chart JS'}, canActivate: [AuthService]  },
    
-  { path: 'calendar', component: CalendarPage, data: { title: 'Calendar'} },
+  { path: 'calendar', component: CalendarPage, data: { title: 'Calendar'},canActivate: [AuthService]   },
   
-  { path: 'map', component: MapPage, data: { title: 'Google Map'} },
+  { path: 'map', component: MapPage, data: { title: 'Google Map'}, canActivate: [AuthService]  },
   
-  { path: 'gallery/v1', component: GalleryV1Page, data: { title: 'Gallery V1'} },
-  { path: 'gallery/v2', component: GalleryV2Page, data: { title: 'Gallery V2'} },
+  { path: 'gallery/v1', component: GalleryV1Page, data: { title: 'Gallery V1'} ,canActivate: [AuthService] },
+  { path: 'gallery/v2', component: GalleryV2Page, data: { title: 'Gallery V2'}, canActivate: [AuthService]  },
   
-	{ path: 'page-option/page-blank', component: PageBlank, data: { title: 'Blank Page'} },
-	{ path: 'page-option/page-with-footer', component: PageFooter, data: { title: 'Page with Footer' } },
-	{ path: 'page-option/page-with-fixed-footer', component: PageFixedFooter, data: { title: 'Page with Fixed Footer' } },
-	{ path: 'page-option/page-without-sidebar', component: PageWithoutSidebar, data: { title: 'Page without Sidebar' } },
-	{ path: 'page-option/page-with-right-sidebar', component: PageSidebarRight, data: { title: 'Page with Right Sidebar' } },
-	{ path: 'page-option/page-with-minified-sidebar', component: PageSidebarMinified, data: { title: 'Page with Minified Sidebar'} },
-	{ path: 'page-option/page-with-two-sidebar', component: PageTwoSidebar, data: { title: 'Page with Two Sidebar' } },
-	{ path: 'page-option/page-full-height', component: PageFullHeight, data: { title: 'Full Height Content' } },
-	{ path: 'page-option/page-with-wide-sidebar', component: PageSidebarWide, data: { title: 'Page with Wide Sidebar' } },
-	{ path: 'page-option/page-with-light-sidebar', component: PageSidebarLight, data: { title: 'Page with Light Sidebar' } },
-	{ path: 'page-option/page-with-transparent-sidebar', component: PageSidebarTransparent, data: { title: 'Page with Transparent Sidebar' } },
-	{ path: 'page-option/page-with-top-menu', component: PageTopMenu, data: { title: 'Page with Top Menu' } },
-	{ path: 'page-option/page-with-mixed-menu', component: PageMixedMenu, data: { title: 'Page with Mixed Menu' } },
-	{ path: 'page-option/page-with-boxed-layout', component: PageBoxedLayout, data: { title: 'Page with Boxed Layout' } },
-	{ path: 'page-option/page-with-mega-menu', component: PageMegaMenu, data: { title: 'Page with Mega Menu' } },
-	{ path: 'page-option/boxed-layout-with-mixed-menu', component: PageBoxedLayoutMixedMenu, data: { title: 'Boxed Layout with Mixed Menu' } },
-	{ path: 'page-option/page-with-search-sidebar', component: PageSidebarSearch, data: { title: 'Page with Search Sidebar' } },
+	{ path: 'page-option/page-blank', component: PageBlank, data: { title: 'Blank Page'} ,canActivate: [AuthService] },
+	{ path: 'page-option/page-with-footer', component: PageFooter, data: { title: 'Page with Footer' } , canActivate: [AuthService]},
+	{ path: 'page-option/page-with-fixed-footer', component: PageFixedFooter, data: { title: 'Page with Fixed Footer' } , canActivate: [AuthService]},
+	{ path: 'page-option/page-without-sidebar', component: PageWithoutSidebar, data: { title: 'Page without Sidebar' },  canActivate: [AuthService] },
+	{ path: 'page-option/page-with-right-sidebar', component: PageSidebarRight, data: { title: 'Page with Right Sidebar' } , canActivate: [AuthService]},
+	{ path: 'page-option/page-with-minified-sidebar', component: PageSidebarMinified, data: { title: 'Page with Minified Sidebar'},  canActivate: [AuthService] },
+	{ path: 'page-option/page-with-two-sidebar', component: PageTwoSidebar, data: { title: 'Page with Two Sidebar' } , canActivate: [AuthService]},
+	{ path: 'page-option/page-full-height', component: PageFullHeight, data: { title: 'Full Height Content' }, canActivate: [AuthService]  },
+	{ path: 'page-option/page-with-wide-sidebar', component: PageSidebarWide, data: { title: 'Page with Wide Sidebar' } , canActivate: [AuthService]},
+	{ path: 'page-option/page-with-light-sidebar', component: PageSidebarLight, data: { title: 'Page with Light Sidebar' } ,canActivate: [AuthService] },
+	{ path: 'page-option/page-with-transparent-sidebar', component: PageSidebarTransparent, data: { title: 'Page with Transparent Sidebar' } ,canActivate: [AuthService] },
+	{ path: 'page-option/page-with-top-menu', component: PageTopMenu, data: { title: 'Page with Top Menu' } , canActivate: [AuthService]},
+	{ path: 'page-option/page-with-mixed-menu', component: PageMixedMenu, data: { title: 'Page with Mixed Menu' },   canActivate: [AuthService]},
+	{ path: 'page-option/page-with-boxed-layout', component: PageBoxedLayout, data: { title: 'Page with Boxed Layout' } ,canActivate: [AuthService] },
+	{ path: 'page-option/page-with-mega-menu', component: PageMegaMenu, data: { title: 'Page with Mega Menu' } , canActivate: [AuthService]},
+	{ path: 'page-option/boxed-layout-with-mixed-menu', component: PageBoxedLayoutMixedMenu, data: { title: 'Boxed Layout with Mixed Menu' },   canActivate: [AuthService]},
+	{ path: 'page-option/page-with-search-sidebar', component: PageSidebarSearch, data: { title: 'Page with Search Sidebar' } ,canActivate: [AuthService] },
   
-  { path: 'extra/timeline', component: ExtraTimelinePage, data: { title: 'Timeline'} },
-  { path: 'extra/coming-soon', component: ExtraComingSoonPage, data: { title: 'Coming Soon Page'} },
-  { path: 'extra/search-results', component: ExtraSearchResultsPage, data: { title: 'Search Results Page'} },
-  { path: 'extra/error-page', component: ExtraErrorPage, data: { title: 'Error Page'} },
-  { path: 'extra/invoice', component: ExtraInvoicePage, data: { title: 'Invoice'} },
-  { path: 'extra/profile', component: ExtraProfilePage, data: { title: 'Profile Page'} },
-  { path: 'extra/scrum-board', component: ExtraScrumBoardPage, data: { title: 'Scrum Board'} },
-  { path: 'extra/cookie-acceptance-banner', component: ExtraCookieAcceptanceBannerPage, data: { title: 'Cookie Acceptance Banner'} },
-  { path: 'extra/orders', component: ExtraOrdersPage, data: { title: 'Orders'} },
-  { path: 'extra/order-details', component: ExtraOrderDetailsPage, data: { title: 'Order Details'} },
-  { path: 'extra/products', component: ExtraProductsPage, data: { title: 'Products'} },
-	{ path: 'extra/product-details', component: ExtraProductDetailsPage, data: { title: 'Product Details'} },
-  { path: 'extra/file-manager', component: ExtraFileManagerPage, data: { title: 'File Manager'} },
-  { path: 'extra/pricing-page', component: ExtraPricingPage, data: { title: 'Pricing Page'} },
-  { path: 'extra/messenger-page', component: ExtraMessengerPage, data: { title: 'Messenger Page'} },
-  { path: 'extra/data-management', component: ExtraDataManagementPage, data: { title: 'Data Management'} },
-  { path: 'extra/settings-page', component: ExtraSettingsPage, data: { title: 'Settings Page'} },
+  { path: 'extra/timeline', component: ExtraTimelinePage, data: { title: 'Timeline'} , canActivate: [AuthService]},
+  { path: 'extra/coming-soon', component: ExtraComingSoonPage, data: { title: 'Coming Soon Page'} ,canActivate: [AuthService] },
+  { path: 'extra/search-results', component: ExtraSearchResultsPage, data: { title: 'Search Results Page'} , canActivate: [AuthService]},
+  { path: 'extra/error-page', component: ExtraErrorPage, data: { title: 'Error Page'}, canActivate: [AuthService]  },
+  { path: 'extra/invoice', component: ExtraInvoicePage, data: { title: 'Invoice'}, canActivate: [AuthService]  },
+  { path: 'extra/profile', component: ExtraProfilePage, data: { title: 'Profile Page'},  canActivate: [AuthService] },
+  { path: 'extra/scrum-board', component: ExtraScrumBoardPage, data: { title: 'Scrum Board'},canActivate: [AuthService]   },
+  { path: 'extra/cookie-acceptance-banner', component: ExtraCookieAcceptanceBannerPage, data: { title: 'Cookie Acceptance Banner'} , canActivate: [AuthService]},
+  { path: 'extra/orders', component: ExtraOrdersPage, data: { title: 'Orders'} ,canActivate: [AuthService] },
+  { path: 'extra/order-details', component: ExtraOrderDetailsPage, data: { title: 'Order Details'} , canActivate: [AuthService]},
+  { path: 'extra/products', component: ExtraProductsPage, data: { title: 'Products'} , canActivate: [AuthService]},
+	{ path: 'extra/product-details', component: ExtraProductDetailsPage, data: { title: 'Product Details'} ,canActivate: [AuthService] },
+  { path: 'extra/file-manager', component: ExtraFileManagerPage, data: { title: 'File Manager'} , canActivate: [AuthService]},
+  { path: 'extra/pricing-page', component: ExtraPricingPage, data: { title: 'Pricing Page'} , canActivate: [AuthService]},
+  { path: 'extra/messenger-page', component: ExtraMessengerPage, data: { title: 'Messenger Page'} ,canActivate: [AuthService] },
+  { path: 'extra/data-management', component: ExtraDataManagementPage, data: { title: 'Data Management'} ,canActivate: [AuthService] },
+  { path: 'extra/settings-page', component: ExtraSettingsPage, data: { title: 'Settings Page'},  canActivate: [AuthService] },
 	
-  { path: 'login/v1', component: LoginV1Page, data: { title: 'Login V1 Page'} },
-  { path: 'login/v2', component: LoginV2Page, data: { title: 'Login V2 Page'} },
-  { path: 'login/v3', component: LoginV3Page, data: { title: 'Login V3 Page'} },
-  { path: 'register/v3', component: RegisterV3Page, data: { title: 'Register V3 Page'} },
+  { path: 'login/v1', component: LoginV1Page, data: { title: 'Login V1 Page'} ,canActivate: [AuthService]},
+  { path: 'login/v2', component: LoginV2Page, data: { title: 'Login V2 Page'} ,canActivate: [AuthService]},
+  { path: 'login/v3', component: LoginV3Page, data: { title: 'Login V3 Page'} ,canActivate: [AuthService]},
+
+  { path: 'register/v2', component: RegisterV2Page, data: { title: 'Register V2 Page'} ,canActivate: [AuthService]},
+  { path: 'register/v3', component: RegisterV3Page, data: { title: 'Register V3 Page'},canActivate: [AuthService]   },
   
-  { path: 'helper/css', component: HelperCssPage, data: { title: 'Helper CSS'} },
+  { path: 'helper/css', component: HelperCssPage, data: { title: 'Helper CSS'} ,canActivate: [AuthService] },
   
-	{ path: '**', component: ErrorPage, data: { title: '404 Error'} }
+	{ path: '**', component: ErrorPage, data: { title: '404 Error'} ,canActivate: [AuthService] }
+
 ];
 
 @NgModule({
-  imports: [ CommonModule, RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ],
-  declarations: []
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
-
-
 export class AppRoutingModule { }

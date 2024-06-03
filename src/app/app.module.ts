@@ -7,6 +7,10 @@ import { AppRoutingModule }                      from './app-routing.module';
 import { NgModule }                              from '@angular/core';
 import { FormsModule, ReactiveFormsModule }      from '@angular/forms';
 
+
+
+
+
 // Main Component
 import { AppComponent }                    from './app.component';
 import { HeaderComponent }                 from './components/header/header.component';
@@ -16,6 +20,7 @@ import { TopMenuComponent }                from './components/top-menu/top-menu.
 import { PanelComponent }                  from './components/panel/panel.component';
 import { FloatSubMenuComponent }           from './components/float-sub-menu/float-sub-menu.component';
 import { ThemePanelComponent }             from './components/theme-panel/theme-panel.component';
+import { AuthService }                     from './components/auth/auth.service';
 
 // Component Module
 import { NgScrollbarModule, NG_SCROLLBAR_OPTIONS } from 'ngx-scrollbar';
@@ -140,6 +145,7 @@ import { ExtraSettingsPage }        from './pages/extra/extra-settings-page/extr
 import { LoginV1Page }              from './pages/login/login-v1/login-v1';
 import { LoginV2Page }              from './pages/login/login-v2/login-v2';
 import { LoginV3Page }              from './pages/login/login-v3/login-v3';
+import { RegisterV2Page }           from './pages/register/register-v3/register-v2';
 import { RegisterV3Page }           from './pages/register/register-v3/register-v3';
 
 // Helper
@@ -248,6 +254,7 @@ import { ErrorPage }                from './pages/error/error';
     LoginV1Page,
     LoginV2Page,
     LoginV3Page,
+    RegisterV2Page,
     RegisterV3Page,
     
     HelperCssPage,
@@ -262,6 +269,9 @@ import { ErrorPage }                from './pages/error/error';
     ReactiveFormsModule,
     NgScrollbarModule,
     FormsModule,
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
     
     // plugins
     HighlightModule,
@@ -297,8 +307,10 @@ import { ErrorPage }                from './pages/error/error';
 				xml: () => import('highlight.js/lib/languages/xml')
 			}
 		}
-	}],
-  bootstrap: [ AppComponent ]
+	},
+  AuthService 
+],
+bootstrap: [AppComponent]
 })
 
 export class AppModule {

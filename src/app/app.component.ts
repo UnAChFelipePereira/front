@@ -4,6 +4,8 @@ import { Router, NavigationEnd, NavigationStart, ActivatedRoute } from '@angular
 import { AppVariablesService } from './service/app-variables.service';
 import { AppSettings } from './service/app-settings.service';
 
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,6 +13,11 @@ import { AppSettings } from './service/app-settings.service';
 })
 
 export class AppComponent implements OnInit {
+
+
+
+
+
   constructor(private titleService: Title, private router: Router, private renderer: Renderer2, public appSettings: AppSettings, private appVariablesService: AppVariablesService) {
     router.events.subscribe((e) => {
 			if (e instanceof NavigationStart) {
@@ -28,6 +35,8 @@ export class AppComponent implements OnInit {
 	appVariables = this.appVariablesService.getAppVariables();
 
   ngOnInit() {
+
+	
     // page settings
     if (this.appSettings.appDarkMode) {
 			this.onAppDarkModeChanged(true);

@@ -1,7 +1,8 @@
 .login.login-v1 {
 	min-height: 100vh;
 	width: 100%;
-	background-image: var(--#{$prefix}app-login-bg-cover);
+	$imagen-url: '/assets/img/subir/22593.jpg';
+	background-image: url($imagen-url);
 	background-size: cover;
 	display: flex;
 	align-items: center;
@@ -459,4 +460,9 @@
 			}
 		}
 	}
+}
+.register-container {
+    background-color: rgba(10, 7, 129, 0.2); /* Blanco con opacidad del 20% */
+    padding: 20px; /* Ajusta el padding según sea necesario */
+    border-radius: 10px; /* Añade bordes redondeados si deseas */
 }
