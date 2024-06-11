@@ -1,7 +1,7 @@
 <!-- BEGIN login -->
 <div class="login login-v2 fw-bold">
 	<div class="login-cover">
-		<div class="login-cover-img" [ngStyle]="{ 'background-image': 'url(/assets/img/subir/22593.jpg)' }"></div>
+		<div class="login-cover-img" [ngStyle]="{ 'background-image': 'url(/assets/img/subir/campus_unach.jpg)' }"></div>
 		<div class="login-cover-bg"></div>
 	  </div>
 	<!-- BEGIN login-container -->
@@ -34,6 +34,11 @@
 					<input type="password" name="password" class="form-control fs-13px h-45px border-0" placeholder="Contraseña" ngModel required />
 					<label for="password" class="d-flex align-items-center text-gray-600 fs-13px">Contraseña</label>
 				  </div>
+
+				  <div class="mb-20px">
+					<div> <a routerLink="/forgot-password">Recuperar contraseña</a></div>
+				  </div>
+				  
 				  <div class="form-check mb-20px">
 					<input class="form-check-input border-0" type="checkbox" value="1" id="rememberMe" />
 					<label class="form-check-label fs-13px" for="rememberMe">

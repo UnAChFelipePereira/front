@@ -3,6 +3,7 @@ import { slideUp } from '../../composables/slideUp.js';
 import { slideToggle } from '../../composables/slideToggle.js';
 import { AppMenuService } from '../../service/app-menus.service';
 import { AppSettings } from '../../service/app-settings.service';
+import { AuthService } from '../../components/auth/auth.service';
 
 @Component({
   selector: 'sidebar',
@@ -10,8 +11,12 @@ import { AppSettings } from '../../service/app-settings.service';
 })
 
 export class SidebarComponent implements AfterViewChecked {
-	menus: any[] = [];
 	
+	
+	menus: any[] = [];
+	userName: string;
+  	userLastName: string;
+
   @ViewChild('sidebarScrollbar', { static: false }) private sidebarScrollbar: ElementRef;
 	@Output() appSidebarMinifiedToggled = new EventEmitter<boolean>();
 	@Output() hideMobileSidebar = new EventEmitter<boolean>();
@@ -301,11 +306,23 @@ export class SidebarComponent implements AfterViewChecked {
   }
   
   
-	ngOnInit() {
-		this.menus = this.appMenuService.getAppMenus(); 
-	}
+  ngOnInit() {
+    this.menus = this.appMenuService.getAppMenus(); 
+    this.userName = localStorage.getItem('userName');
+    this.userLastName = localStorage.getItem('userLastName');
 
-  constructor(private eRef: ElementRef, public appSettings: AppSettings, private appMenuService: AppMenuService) {
+    console.log('El nombre es: ' + this.userName);
+    console.log('El apellido es: ' + this.userLastName);
+  }
+
+
+
+
+
+
+
+
+  constructor(private eRef: ElementRef, public appSettings: AppSettings, private appMenuService: AppMenuService,private authService: AuthService) {
     if (window.innerWidth <= 767) {
       this.mobileMode = true;
       this.desktopMode = false;

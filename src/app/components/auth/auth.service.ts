@@ -4,17 +4,19 @@ import { Observable, last } from 'rxjs';
 import { CanActivate,  Router,  } from '@angular/router';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService implements CanActivate {
 
-
+  access_token = '';
 
   private apiUrllogin = 'http://localhost:3000/users/login';
   private apiUrlregister = 'http://localhost:3000/users/register';
   private apiUrlperfil = 'http://localhost:3000/users/perfil';
- 
+  private apiUrlforgot = 'http://localhost:3000/users/forgot-password';
+  private apiUrlreset = 'http://localhost:3000/users/reset-password';
 
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -32,8 +34,20 @@ export class AuthService implements CanActivate {
     return this.http.post<any>(this.apiUrlperfil, { email, name, lastname });
   }
 
-  obtenerDatosPerfil(): Observable<any> {
+  getUserProfile(): Observable<any> {
     return this.http.get<any>(this.apiUrlperfil);
+  }
+
+  forgotPassword(email:string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrlforgot}`, {email});
+  }
+
+  changePassword(email:string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrlforgot}`, {email});
+  }
+
+  resetPassword(newPassword:string, resetToken: string): Observable<any> {
+    return this.http.put<any>(`${this.apiUrlreset}`, {newPassword,resetToken});
   }
 
 
@@ -45,6 +59,7 @@ export class AuthService implements CanActivate {
     if (token && token.trim() !== '') {
       // Si el token existe, permite el acceso a la ruta protegida
       console.log("Usuario autenticado. Permitiendo acceso.");
+      console.log(token);
       return true;
     } else {
       // Si no hay token, redirigir al usuario al componente de login y retornar falso

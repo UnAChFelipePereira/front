@@ -110,13 +110,14 @@ import { ExtraMessengerPage }       from './pages/extra/extra-messenger-page/ext
 import { ExtraDataManagementPage }  from './pages/extra/extra-data-management/extra-data-management';
 import { ExtraSettingsPage }        from './pages/extra/extra-settings-page/extra-settings-page';
 
-// User Login / Register
+// User Login / Register / Forgot / Reset
 import { LoginV1Page }              from './pages/login/login-v1/login-v1';
 import { LoginV2Page }              from './pages/login/login-v2/login-v2';
 import { LoginV3Page }              from './pages/login/login-v3/login-v3';
 import { RegisterV2Page }           from './pages/register/register-v3/register-v2';
 import { RegisterV3Page }           from './pages/register/register-v3/register-v3';
-
+import { ForgotV1Page }             from './pages/forgotPassword/forgot-password-v1';
+import { ResetPasswordV1Page }      from './pages/resetPassword/resetPassword-v1';
 // Helper
 import { HelperCssPage }            from './pages/helper/helper-css/helper-css';
 
@@ -126,7 +127,9 @@ import { ErrorPage }                from './pages/error/error';
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'login', component: LoginV1Page},
+  { path: 'forgot-password', component: ForgotV1Page},
   { path: 'register', component: RegisterV2Page },
+  { path: 'reset-password', component: ResetPasswordV1Page, canActivate: [AuthService]  },
   { path: 'dashboard', component: DashboardV1Page, canActivate: [AuthService] },
   
   { path: 'dashboard/v1', component: DashboardV1Page, data: { title: 'Dashboard V1'},canActivate: [AuthService] },

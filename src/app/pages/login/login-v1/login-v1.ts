@@ -24,7 +24,7 @@ export class LoginV1Page implements OnDestroy {
   ngOnDestroy() {
     this.appSettings.appEmpty = false;
   }
-
+/*
   formSubmit(f: NgForm) {
     if (f.valid) {
       const formData = f.value;
@@ -33,13 +33,13 @@ export class LoginV1Page implements OnDestroy {
         response => {
           console.log('Respuesta del inicio de sesión:', response);
           
+          // Almacena el nombre y el apellido del usuario en el servicio de autenticación
+          this.authService.perfil(response.user.email, response.user.name, response.user.lastname);
 
-          localStorage.setItem('access_token', response.access_token);
-          localStorage.setItem('refresh_token', response.refresh_token);
-
-          console.log(response.access_token)
-          console.log(response.refresh_token)
-          
+          console.log(response.user.name);
+          console.log(response.user.lastname);
+  
+          // Navega al dashboard
           this.router.navigate(['dashboard']);
           return true;
         },
@@ -50,6 +50,37 @@ export class LoginV1Page implements OnDestroy {
       );
     }
   }
+*/
+
+formSubmit(f: NgForm) {
+  if (f.valid) {
+      const formData = f.value;
+
+      this.authService.login(formData.email, formData.password).subscribe(
+          response => {
+              console.log('Respuesta del inicio de sesión:', response);
+
+              // Almacena el nombre y el apellido del usuario en el servicio de autenticación
+              this.authService.perfil(response.user.email, response.user.name, response.user.lastname);
+
+              // Guardar en localStorage
+              localStorage.setItem('userName', response.user.name);
+              localStorage.setItem('userLastName', response.user.lastname);
+
+              //console.log(response.user.name);
+              //console.log(response.user.lastname);
+
+              // Navega al dashboard
+              this.router.navigate(['dashboard']);
+              return true;
+          },
+          error => {
+              this.showErrorAlert('Correo o contraseña incorrecta.');
+              console.error('Error al iniciar sesión:', error);
+          }
+      );
+  }
+}
 
   showErrorAlert(message: string) {
     this.alertMessage = message;

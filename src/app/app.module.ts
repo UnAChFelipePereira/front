@@ -147,12 +147,16 @@ import { LoginV2Page }              from './pages/login/login-v2/login-v2';
 import { LoginV3Page }              from './pages/login/login-v3/login-v3';
 import { RegisterV2Page }           from './pages/register/register-v3/register-v2';
 import { RegisterV3Page }           from './pages/register/register-v3/register-v3';
+import { ForgotV1Page }           from './pages/forgotPassword/forgot-password-v1';
+import { ResetPasswordV1Page } from './pages/resetPassword/resetPassword-v1';
 
 // Helper
 import { HelperCssPage }            from './pages/helper/helper-css/helper-css';
 
 // Error
 import { ErrorPage }                from './pages/error/error';
+
+
 
 @NgModule({
   declarations: [
@@ -256,6 +260,8 @@ import { ErrorPage }                from './pages/error/error';
     LoginV3Page,
     RegisterV2Page,
     RegisterV3Page,
+    ForgotV1Page,
+    ResetPasswordV1Page,
     
     HelperCssPage,
     
