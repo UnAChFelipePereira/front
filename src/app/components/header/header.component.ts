@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, Renderer2, OnDestroy } from '@angular/core';
 import { AppSettings } from '../../service/app-settings.service';
+import { AppMenuService } from '../../service/app-menus.service';
 
 declare var slideToggle: any;
 
@@ -8,6 +9,12 @@ declare var slideToggle: any;
   templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnDestroy {
+
+		
+	menus: any[] = [];
+	userName: string;
+  	userLastName: string;
+
   @Input() appSidebarTwo;
 	@Output() appSidebarEndToggled = new EventEmitter<boolean>();
 	@Output() appSidebarMobileToggled = new EventEmitter<boolean>();
@@ -40,6 +47,16 @@ export class HeaderComponent implements OnDestroy {
 	  this.appSettings.appHeaderMegaMenuMobileToggled = false;
 	}
 
-  constructor(private renderer: Renderer2, public appSettings: AppSettings) {
+
+	ngOnInit() {
+		this.menus = this.appMenuService.getAppMenus(); 
+		this.userName = localStorage.getItem('userName');
+		this.userLastName = localStorage.getItem('userLastName');
+	
+		//console.log('El nombre es: ' + this.userName);
+		//console.log('El apellido es: ' + this.userLastName);
+	  }
+
+  constructor(private renderer: Renderer2, public appSettings: AppSettings,private appMenuService: AppMenuService) {
   }
 }

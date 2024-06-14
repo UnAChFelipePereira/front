@@ -118,6 +118,11 @@ import { RegisterV2Page }           from './pages/register/register-v3/register-
 import { RegisterV3Page }           from './pages/register/register-v3/register-v3';
 import { ForgotV1Page }             from './pages/forgotPassword/forgot-password-v1';
 import { ResetPasswordV1Page }      from './pages/resetPassword/resetPassword-v1';
+
+
+//Inicio
+import { InicioPage } from './pages/inicio/Inicio';
+
 // Helper
 import { HelperCssPage }            from './pages/helper/helper-css/helper-css';
 
@@ -125,12 +130,13 @@ import { HelperCssPage }            from './pages/helper/helper-css/helper-css';
 import { ErrorPage }                from './pages/error/error';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   { path: 'login', component: LoginV1Page},
   { path: 'forgot-password', component: ForgotV1Page},
   { path: 'register', component: RegisterV2Page },
   { path: 'reset-password', component: ResetPasswordV1Page, canActivate: [AuthService]  },
   { path: 'dashboard', component: DashboardV1Page, canActivate: [AuthService] },
+  { path: 'inicio', component: InicioPage, canActivate: [AuthService] },
   
   { path: 'dashboard/v1', component: DashboardV1Page, data: { title: 'Dashboard V1'},canActivate: [AuthService] },
   { path: 'dashboard/v2', component: DashboardV2Page, data: { title: 'Dashboard V2'},canActivate: [AuthService]  },

@@ -150,6 +150,10 @@ import { RegisterV3Page }           from './pages/register/register-v3/register-
 import { ForgotV1Page }           from './pages/forgotPassword/forgot-password-v1';
 import { ResetPasswordV1Page } from './pages/resetPassword/resetPassword-v1';
 
+//Inicio
+
+import { InicioPage } from './pages/inicio/Inicio';
+
 // Helper
 import { HelperCssPage }            from './pages/helper/helper-css/helper-css';
 
@@ -262,6 +266,8 @@ import { ErrorPage }                from './pages/error/error';
     RegisterV3Page,
     ForgotV1Page,
     ResetPasswordV1Page,
+
+    InicioPage,
     
     HelperCssPage,
     
