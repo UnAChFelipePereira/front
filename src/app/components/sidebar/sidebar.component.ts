@@ -16,6 +16,7 @@ export class SidebarComponent implements AfterViewChecked {
 	menus: any[] = [];
 	userName: string;
   	userLastName: string;
+	userEmail: string;
 
   @ViewChild('sidebarScrollbar', { static: false }) private sidebarScrollbar: ElementRef;
 	@Output() appSidebarMinifiedToggled = new EventEmitter<boolean>();
@@ -310,9 +311,12 @@ export class SidebarComponent implements AfterViewChecked {
     this.menus = this.appMenuService.getAppMenus(); 
     this.userName = localStorage.getItem('userName');
     this.userLastName = localStorage.getItem('userLastName');
+	this.userEmail = localStorage.getItem('userEmail');
+    console.log('El correo es:', this.userEmail);
 
     console.log('El nombre es: ' + this.userName);
     console.log('El apellido es: ' + this.userLastName);
+	//console.log('El correo es: ' + this.userEmail);
   }
 
 

@@ -119,6 +119,10 @@ import { RegisterV3Page }           from './pages/register/register-v3/register-
 import { ForgotV1Page }             from './pages/forgotPassword/forgot-password-v1';
 import { ResetPasswordV1Page }      from './pages/resetPassword/resetPassword-v1';
 
+//edit perfil
+
+import { SettingsPageV1 } from './pages/perfil/settings-page';
+
 
 //Inicio
 import { InicioPage } from './pages/inicio/Inicio';
@@ -144,7 +148,8 @@ const routes: Routes = [
   
   { path: 'email/inbox', component: EmailInboxPage, data: { title: 'Email Inbox'}, canActivate: [AuthService]},
   { path: 'email/compose', component: EmailComposePage, data: { title: 'Email Compose'},  canActivate: [AuthService] },
-  { path: 'email/detail', component: EmailDetailPage, data: { title: 'Email Detail'},canActivate: [AuthService]   },
+  { path: 'email/detail', component: EmailDetailPage, data: { title: 'Email Detail'},canActivate: [AuthService]},
+  {path: 'settings-page', component: SettingsPageV1, data: {title:'Editar Perfil'},canActivate: [AuthService]},
 
   { path: 'widget', component: WidgetPage, data: { title: 'Widgets'}, canActivate: [AuthService]  },
   

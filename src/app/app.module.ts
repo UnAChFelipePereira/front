@@ -149,6 +149,9 @@ import { RegisterV2Page }           from './pages/register/register-v3/register-
 import { RegisterV3Page }           from './pages/register/register-v3/register-v3';
 import { ForgotV1Page }           from './pages/forgotPassword/forgot-password-v1';
 import { ResetPasswordV1Page } from './pages/resetPassword/resetPassword-v1';
+//
+
+import { SettingsPageV1 } from './pages/perfil/settings-page';
 
 //Inicio
 
@@ -266,6 +269,7 @@ import { ErrorPage }                from './pages/error/error';
     RegisterV3Page,
     ForgotV1Page,
     ResetPasswordV1Page,
+    SettingsPageV1,
 
     InicioPage,
     

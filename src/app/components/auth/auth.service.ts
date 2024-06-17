@@ -17,6 +17,8 @@ export class AuthService implements CanActivate {
   private apiUrlperfil = 'http://localhost:3000/users/perfil';
   private apiUrlforgot = 'http://localhost:3000/users/forgot-password';
   private apiUrlreset = 'http://localhost:3000/users/reset-password';
+  private apiUlrchange = 'http://localhost:3000/users/change-password';
+  private apiUrlfoto = 'http://localhost:3000/users/upload-profile-pic';
 
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -42,12 +44,20 @@ export class AuthService implements CanActivate {
     return this.http.post<any>(`${this.apiUrlforgot}`, {email});
   }
 
-  changePassword(email:string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrlforgot}`, {email});
+  changePassword(email:string, oldPassword: string, newPassword: string): Observable<any> {
+    return this.http.put<any>(`${this.apiUlrchange}`, {email,oldPassword, newPassword});
   }
+
 
   resetPassword(newPassword:string, resetToken: string): Observable<any> {
     return this.http.put<any>(`${this.apiUrlreset}`, {newPassword,resetToken});
+  }
+
+  uploadProfilePic(file: File) {
+    const formData = new FormData();
+    formData.append('profilePic', file);
+
+    return this.http.post<any>(`${this.apiUrlfoto}`, formData);
   }
 
 

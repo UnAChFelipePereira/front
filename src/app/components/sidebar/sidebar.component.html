@@ -32,21 +32,9 @@
 			</div>
 			<div id="appSidebarProfileMenu" class="collapse" *ngIf="!appSettings.appSidebarSearch">
 				<div class="menu-item pt-5px">
-					<a href="extra/settings-page" class="menu-link">
+					<a href="/settings-page" class="menu-link">
 						<div class="menu-icon"><i class="fa fa-cog"></i></div>
 						<div class="menu-text">Editar perfil </div>
-					</a>
-				</div>
-				<div class="menu-item">
-					<a href="javascript:;" class="menu-link">
-						<div class="menu-icon"><i class="fa fa-pencil-alt"></i></div>
-						<div class="menu-text"> Send Feedback</div>
-					</a>
-				</div>
-				<div class="menu-item pb-5px">
-					<a href="javascript:;" class="menu-link">
-						<div class="menu-icon"><i class="fa fa-question-circle"></i></div>
-						<div class="menu-text"> Helps</div>
 					</a>
 				</div>
 				<div class="menu-divider m-0"></div>
@@ -55,7 +43,7 @@
 			<div class="menu-search mb-n3" *ngIf="appSettings.appSidebarSearch">
         <input type="text" class="form-control" placeholder="Sidebar menu filter..." (keyup)="appSidebarSearch($event)" />
       </div>
-      <div class="menu-header">Navigation</div>
+      <div class="menu-header">Menú</div>
 
       <!--- render sidebarMenuNav -->
       <ng-template #sidebarMenuNav let-menu="menu">

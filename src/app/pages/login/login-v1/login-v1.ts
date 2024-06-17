@@ -64,6 +64,7 @@ formSubmit(f: NgForm) {
               this.authService.perfil(response.user.email, response.user.name, response.user.lastname);
 
               // Guardar en localStorage
+              localStorage.setItem('userEmail', response.user.email);
               localStorage.setItem('userName', response.user.name);
               localStorage.setItem('userLastName', response.user.lastname);
 

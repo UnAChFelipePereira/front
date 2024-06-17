@@ -31,9 +31,9 @@ RUN npm install -g @angular/cli@17.0.2
 # Instalar las dependencias del proyecto
 RUN npm install --force
 
-RUN ng generate service api
+#RUN ng generate service api
 
-RUN npm install rxjs @angular/common @angular/core @angular/http @angular/router --save
+#RUN npm install rxjs @angular/common @angular/core @angular/http @angular/router --save
 
 
 #RUN npm init --force
