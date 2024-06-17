@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { AppSettings } from '../../../service/app-settings.service';
 import { AuthService } from '../../../components/auth/auth.service';
+// import { profile } from 'console';
 
 @Component({
   selector: 'login-v1',
@@ -15,6 +16,7 @@ export class LoginV1Page implements OnDestroy {
   showError = false;
   showSuccess = false;
   alertMessage = '';
+  userProfile: any;
 
 
   constructor(private authService: AuthService, private router: Router, public appSettings: AppSettings) {
@@ -61,15 +63,18 @@ formSubmit(f: NgForm) {
               console.log('Respuesta del inicio de sesión:', response);
 
               // Almacena el nombre y el apellido del usuario en el servicio de autenticación
-              this.authService.perfil(response.user.email, response.user.name, response.user.lastname);
+              this.authService.perfil(response.user.email, response.user.name, response.user.lastname, response.user.profilePic);
+              this.userProfile = response;
 
               // Guardar en localStorage
               localStorage.setItem('userEmail', response.user.email);
               localStorage.setItem('userName', response.user.name);
               localStorage.setItem('userLastName', response.user.lastname);
+              localStorage.setItem('userProfilePic', response.user.profilePic);
 
               //console.log(response.user.name);
               //console.log(response.user.lastname);
+              console.log(response.user.profilePic);
 
               // Navega al dashboard
               this.router.navigate(['dashboard']);

@@ -20,6 +20,7 @@ export class SettingsPageV1 implements OnInit {
 	showSuccess = false;
 	alertMessage = '';
 	selectedFile: File | null = null;
+	userProfile: any;
   
   constructor(public appSettings: AppSettings, private authService: AuthService,private router: Router) {
   }
@@ -31,6 +32,8 @@ export class SettingsPageV1 implements OnInit {
 		this.userName = localStorage.getItem('userName');
 		this.userLastName = localStorage.getItem('userLastName');
 		this.userEmail = localStorage.getItem('userEmail');
+		//localStorage.setItem('userProfilePic', response.user.profilePic);
+		this.userProfile = localStorage.getItem('userProfilePic');
 		
 
 
@@ -130,25 +133,24 @@ export class SettingsPageV1 implements OnInit {
 
 	onFileSelected(event: any) {
 		this.selectedFile = event.target.files[0] as File;
-	  }
-
-	onSubmit() {
+	}
+	
+	submitPhoto(f: NgForm) {
 		if (!this.selectedFile) {
-		  console.error('No se ha seleccionado ningún archivo.');
-		  return;
+			this.showErrorAlert('No se ha seleccionado ningún archivo.');
+			return;
 		}
 	
 		this.authService.uploadProfilePic(this.selectedFile).subscribe(
-		  response => {
-			console.log('Imagen de perfil subida correctamente');
-			// Manejar la respuesta (por ejemplo, mostrar mensaje al usuario)
-		  },
-		  error => {
-			console.error('Error al subir la imagen de perfil:', error);
-			// Manejar el error (por ejemplo, mostrar mensaje de error al usuario)
-		  }
+			response => {
+				this.showSuccessAlert('Imagen de perfil subida correctamente');
+			},
+			error => {
+				console.error('Error al subir la imagen de perfil:', error);
+				this.showErrorAlert('Error al subir la imagen de perfil.');
+			}
 		);
-	  }
+	}
 
 	
 

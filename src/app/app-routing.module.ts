@@ -123,6 +123,9 @@ import { ResetPasswordV1Page }      from './pages/resetPassword/resetPassword-v1
 
 import { SettingsPageV1 } from './pages/perfil/settings-page';
 
+//plataforma
+
+import { BuscarCursosPage } from './pages/vercursos/buscar-cursos';
 
 //Inicio
 import { InicioPage } from './pages/inicio/Inicio';
@@ -132,6 +135,7 @@ import { HelperCssPage }            from './pages/helper/helper-css/helper-css';
 
 // Error
 import { ErrorPage }                from './pages/error/error';
+//import { title } from 'process';
 
 const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -145,7 +149,14 @@ const routes: Routes = [
   { path: 'dashboard/v1', component: DashboardV1Page, data: { title: 'Dashboard V1'},canActivate: [AuthService] },
   { path: 'dashboard/v2', component: DashboardV2Page, data: { title: 'Dashboard V2'},canActivate: [AuthService]  },
   { path: 'dashboard/v3', component: DashboardV3Page, data: { title: 'Dashboard V3'},canActivate: [AuthService] },
-  
+
+  //cursos
+
+  {path:'buscar-cursos', component:BuscarCursosPage, data: {title: 'Buscar cursos'},canActivate: [AuthService]},
+
+
+  //cursos
+
   { path: 'email/inbox', component: EmailInboxPage, data: { title: 'Email Inbox'}, canActivate: [AuthService]},
   { path: 'email/compose', component: EmailComposePage, data: { title: 'Email Compose'},  canActivate: [AuthService] },
   { path: 'email/detail', component: EmailDetailPage, data: { title: 'Email Detail'},canActivate: [AuthService]},
