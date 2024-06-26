@@ -54,39 +54,57 @@ export class LoginV1Page implements OnDestroy {
   }
 */
 
+// formSubmit(f: NgForm) {
+//   if (f.valid) {
+//       const formData = f.value;
+
+//       this.authService.login(formData.email, formData.password).subscribe(
+//           response => {
+//               console.log('Respuesta del inicio de sesión:', response);
+
+//               // Almacena el nombre y el apellido del usuario en el servicio de autenticación
+//               this.authService.perfil(response.user.email, response.user.name, response.user.lastname, response.user.profilePic);
+//               this.userProfile = response;
+
+//               // Guardar en localStorage
+//               localStorage.setItem('userEmail', response.user.email);
+//               localStorage.setItem('userName', response.user.name);
+//               localStorage.setItem('userLastName', response.user.lastname);
+//               localStorage.setItem('userProfilePic', response.user.profilePic);
+
+//               //console.log(response.user.name);
+//               //console.log(response.user.lastname);
+//               console.log(response.user.profilePic);
+
+//               // Navega al dashboard
+//               this.router.navigate(['dashboard']);
+//               return true;
+//           },
+//           error => {
+//               this.showErrorAlert('Correo o contraseña incorrecta.');
+//               console.error('Error al iniciar sesión:', error);
+//           }
+//       );
+//   }
+// }
+
 formSubmit(f: NgForm) {
   if (f.valid) {
-      const formData = f.value;
-
-      this.authService.login(formData.email, formData.password).subscribe(
-          response => {
-              console.log('Respuesta del inicio de sesión:', response);
-
-              // Almacena el nombre y el apellido del usuario en el servicio de autenticación
-              this.authService.perfil(response.user.email, response.user.name, response.user.lastname, response.user.profilePic);
-              this.userProfile = response;
-
-              // Guardar en localStorage
-              localStorage.setItem('userEmail', response.user.email);
-              localStorage.setItem('userName', response.user.name);
-              localStorage.setItem('userLastName', response.user.lastname);
-              localStorage.setItem('userProfilePic', response.user.profilePic);
-
-              //console.log(response.user.name);
-              //console.log(response.user.lastname);
-              console.log(response.user.profilePic);
-
-              // Navega al dashboard
-              this.router.navigate(['dashboard']);
-              return true;
-          },
-          error => {
-              this.showErrorAlert('Correo o contraseña incorrecta.');
-              console.error('Error al iniciar sesión:', error);
-          }
-      );
+    const formData = f.value;
+    this.authService.login(formData.email, formData.password).subscribe(
+      response => {
+        console.log('Respuesta del inicio de sesión:', response);
+        // Navegar al dashboard u otra página según la lógica de tu aplicación
+        this.router.navigate(['inicio']);
+      },
+      error => {
+        this.showErrorAlert('Correo o contraseña incorrecta.');
+        console.error('Error al iniciar sesión:', error);
+      }
+    );
   }
 }
+
 
   showErrorAlert(message: string) {
     this.alertMessage = message;

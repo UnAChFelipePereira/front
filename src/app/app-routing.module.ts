@@ -129,6 +129,9 @@ import { BuscarCursosPage } from './pages/vercursos/buscar-cursos';
 
 //Inicio
 import { InicioPage } from './pages/inicio/Inicio';
+//curso
+import { AddPage } from './pages/addpage/addpage';
+import { AddInfo } from './pages/addinfo/addinfo';
 
 // Helper
 import { HelperCssPage }            from './pages/helper/helper-css/helper-css';
@@ -139,12 +142,14 @@ import { ErrorPage }                from './pages/error/error';
 
 const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-  { path: 'login', component: LoginV1Page},
-  { path: 'forgot-password', component: ForgotV1Page},
-  { path: 'register', component: RegisterV2Page },
-  { path: 'reset-password', component: ResetPasswordV1Page, canActivate: [AuthService]  },
-  { path: 'dashboard', component: DashboardV1Page, canActivate: [AuthService] },
-  { path: 'inicio', component: InicioPage, canActivate: [AuthService] },
+  { path: 'login', component: LoginV1Page, data: { title: 'Inciar sesión'}},
+  { path: 'forgot-password', component: ForgotV1Page, data: { title: 'Olvidé mi contraseña'}},
+  { path: 'register', component: RegisterV2Page, data: { title: 'Registro'} },
+  { path: 'reset-password', component: ResetPasswordV1Page, data: { title: 'Reiniciar contraseña'}, canActivate: [AuthService]  },
+  { path: 'dashboard', component: DashboardV1Page, data: { title: 'Dashboard'}, canActivate: [AuthService] },
+  { path: 'inicio', component: InicioPage, data: { title: 'Inicio'}, canActivate: [AuthService] },
+
+  
   
   { path: 'dashboard/v1', component: DashboardV1Page, data: { title: 'Dashboard V1'},canActivate: [AuthService] },
   { path: 'dashboard/v2', component: DashboardV2Page, data: { title: 'Dashboard V2'},canActivate: [AuthService]  },
@@ -153,7 +158,8 @@ const routes: Routes = [
   //cursos
 
   {path:'buscar-cursos', component:BuscarCursosPage, data: {title: 'Buscar cursos'},canActivate: [AuthService]},
-
+  {path:'addpage', component:AddPage, data: {title: 'Crear Curso'},canActivate: [AuthService]},
+  { path: 'addinfo', component: AddInfo, data: { title: 'Crear Curso'}, canActivate: [AuthService] },
 
   //cursos
 

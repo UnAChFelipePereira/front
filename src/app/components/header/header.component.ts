@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, Renderer2, OnDestroy } from '@angular/core';
 import { AppSettings } from '../../service/app-settings.service';
 import { AppMenuService } from '../../service/app-menus.service';
+import { AuthService } from '../auth/auth.service';
 
 declare var slideToggle: any;
 
@@ -57,6 +58,10 @@ export class HeaderComponent implements OnDestroy {
 		//console.log('El apellido es: ' + this.userLastName);
 	  }
 
-  constructor(private renderer: Renderer2, public appSettings: AppSettings,private appMenuService: AppMenuService) {
+
+	  cerrarSesion() {
+		this.authService.logout();
+	  }
+  constructor(private renderer: Renderer2, public appSettings: AppSettings,private appMenuService: AppMenuService, private authService: AuthService) {
   }
 }

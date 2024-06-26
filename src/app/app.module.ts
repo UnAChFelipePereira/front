@@ -158,6 +158,8 @@ import { BuscarCursosPage } from './pages/vercursos/buscar-cursos';
 //cursos
 
 import { SettingsPageV1 } from './pages/perfil/settings-page';
+import { AddPage } from './pages/addpage/addpage';
+import { AddInfo } from './pages/addinfo/addinfo';
 
 //Inicio
 
@@ -279,6 +281,8 @@ import { ErrorPage }                from './pages/error/error';
 
     InicioPage,
     BuscarCursosPage,
+    AddPage,
+    AddInfo,
     
     HelperCssPage,
     

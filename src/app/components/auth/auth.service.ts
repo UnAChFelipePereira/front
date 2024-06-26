@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, last } from 'rxjs';
+import { Observable, last, tap } from 'rxjs';
 import { CanActivate,  Router,  } from '@angular/router';
 
 
@@ -29,8 +29,21 @@ export class AuthService implements CanActivate {
   }
 
 
-  login(email: string, password: string) {
-    return this.http.post<any>(this.apiUrllogin, { email, password });
+  // login(email: string, password: string, access_token: string, refresh_token:string) {
+  //   return this.http.post<any>(this.apiUrllogin, { email, password,access_token, refresh_token });
+  // }
+
+  login(email: string, password: string): Observable<any> {
+    return this.http.post<any>(this.apiUrllogin, { email, password }).pipe(
+      tap(response => {
+        // Almacenar el token en localStorage
+        localStorage.setItem('access_token', response.access_token);
+        // También podrías almacenar otros datos del usuario si los necesitas
+        localStorage.setItem('userEmail', response.user.email);
+        localStorage.setItem('userName', response.user.name);
+        localStorage.setItem('userLastName', response.user.lastname);
+      })
+    );
   }
   perfil(email: string, name: string, lastname: string, profilePic: string): Observable<any> {
     return this.http.post<any>(this.apiUrlperfil, { email, name, lastname, profilePic });
@@ -59,6 +72,20 @@ export class AuthService implements CanActivate {
   
     return this.http.post<any>(`${this.apiUrlfoto}`, formData);
   }
+
+
+  logout() {
+
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('userLastName');
+    localStorage.removeItem('userProfilePic');
+
+
+    this.router.navigate(['/login']);
+  }
+
 
 
   canActivate(): boolean {
