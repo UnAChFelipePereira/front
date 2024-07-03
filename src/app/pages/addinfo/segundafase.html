@@ -1,0 +1,454 @@
+<div class="nav-wizards-container fixed-top">
+  <nav class="nav nav-wizards-1 mb-2">
+    <!-- completed -->
+    <div class="nav-item col">
+      <a class="nav-link completed" href="/crearcurso">
+        <div class="nav-no">1</div>
+        <div class="nav-text">Datos del curso</div>
+      </a>
+    </div>
+
+    <!-- active -->
+    <div class="nav-item col">
+      <a class="nav-link completed" href="/primerafase">
+        <div class="nav-no">2</div>
+        <div class="nav-text">Primera fase</div>
+      </a>
+    </div>
+
+    <!-- disabled -->
+    <div class="nav-item col">
+      <a class="nav-link active" href="/segundafase">
+        <div class="nav-no">3</div>
+        <div class="nav-text">Segunda fase</div>
+      </a>
+    </div>
+
+    <div class="nav-item col">
+      <a class="nav-link disabled" href="#">
+        <div class="nav-no">4</div>
+        <div class="nav-text">Tercera fase</div>
+      </a>
+    </div>
+
+    <div class="nav-item col">
+      <a class="nav-link disabled" href="#">
+        <div class="nav-no">5</div>
+        <div class="nav-text">Cuarta fase</div>
+      </a>
+    </div>
+
+    <div class="nav-item col">
+      <a class="nav-link disabled" href="#">
+        <div class="nav-no">6</div>
+        <div class="nav-text">Quinta fase</div>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-8">
+          <div class="card border-0 mb-4">
+            <div class="card-header h6 mb-0 bg-none p-3">
+              <i
+                class="fas fa-pencil-alt fa-fw text-dark text-opacity-50 me-1"
+              ></i>
+              Creación del curso: Segunda Fase
+            </div>
+
+          <div class="card border-0 mb-4">
+            <div class="card-body">
+
+              <label class="form-label">Documentos </label>
+              <div id="dropzone">
+                <form
+                  action="/upload"
+                  class="dropzone needsclick"
+                  id="demo-upload">
+                  <div class="dz-message needsclick">
+                    Has <b>clic aquí</b> para subir documentos.<br />
+                  </div>
+                </form>
+              </div>
+              <div>
+              <br>
+            <div class="mb-3">
+              <label class="form-label">Intrucciones </label>
+              <textarea class="form-control" formControlName="Descripcioncurso"
+                  placeholder="En esta fase debes...." rows="4"></textarea>
+           </div>
+            </div>
+
+            </div>
+          </div>
+         <!-- PREGUNTA 1 -->
+<div class="card border-0 mb-4">
+  <div class="card-body bg-light rounded-bottom">
+    <div class="form-group mb-0">
+      <label class="form-label">Pregunta 1</label>
+      <input type="text" class="form-control" id="pregunta1" name="pregunta[]" placeholder="Ingrese la pregunta aquí..">
+      <hr class="mt-2 mb-2" />
+
+      <div class="opciones-container">
+        <!-- Opción 1 -->
+        <div class="row align-items-center opcion">
+          <div class="col-6 pt-1 pb-1">
+            <input type="text" class="form-control opcion-text" name="opcion[0][]" placeholder="Ingrese opción 1">
+          </div>
+          <div class="col-6 d-flex align-items-center">
+            <div class="form-check form-switch ms-auto">
+              <input type="radio" class="form-check-input opcion-correcta" name="respuesta_correcta[0]" value="0">
+              <label class="form-check-label">&nbsp;</label>
+            </div>
+          </div>
+        </div>
+        <hr class="mt-2 mb-2" />
+
+        <!-- Opción 2 -->
+        <div class="row align-items-center opcion">
+          <div class="col-6 pt-1 pb-1">
+            <input type="text" class="form-control opcion-text" name="opcion[0][]" placeholder="Ingrese opción 2">
+          </div>
+          <div class="col-6 d-flex align-items-center">
+            <div class="form-check form-switch ms-auto">
+              <input type="radio" class="form-check-input opcion-correcta" name="respuesta_correcta[0]" value="1">
+              <label class="form-check-label">&nbsp;</label>
+            </div>
+          </div>
+        </div>
+        <hr class="mt-2 mb-2" />
+
+        <!-- Opción 3 -->
+        <div class="row align-items-center opcion">
+          <div class="col-6 pt-1 pb-1">
+            <input type="text" class="form-control opcion-text" name="opcion[0][]" placeholder="Ingrese opción 3">
+          </div>
+          <div class="col-6 d-flex align-items-center">
+            <div class="form-check form-switch ms-auto">
+              <input type="radio" class="form-check-input opcion-correcta" name="respuesta_correcta[0]" value="2">
+              <label class="form-check-label">&nbsp;</label>
+            </div>
+          </div>
+        </div>
+        <hr class="mt-2 mb-2" />
+
+        <!-- Opción 4 -->
+        <div class="row align-items-center opcion">
+          <div class="col-6 pt-1 pb-1">
+            <input type="text" class="form-control opcion-text" name="opcion[0][]" placeholder="Ingrese opción 4">
+          </div>
+          <div class="col-6 d-flex align-items-center">
+            <div class="form-check form-switch ms-auto">
+              <input type="radio" class="form-check-input opcion-correcta" name="respuesta_correcta[0]" value="3">
+              <label class="form-check-label">&nbsp;</label>
+            </div>
+          </div>
+        </div>
+        <hr class="mt-2 mb-2" />
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- FIN PREGUNTA 1 -->
+
+<!-- PREGUNTA 2 -->
+<div class="card border-0 mb-4">
+  <div class="card-body bg-light rounded-bottom">
+    <div class="form-group mb-0">
+      <label class="form-label">Pregunta 2</label>
+      <input type="text" class="form-control" id="pregunta2" name="pregunta[]" placeholder="Ingrese la pregunta aquí..">
+      <hr class="mt-2 mb-2" />
+
+      <div class="opciones-container">
+        <!-- Opción 1 -->
+        <div class="row align-items-center opcion">
+          <div class="col-6 pt-1 pb-1">
+            <input type="text" class="form-control opcion-text" name="opcion[1][]" placeholder="Ingrese opción 1">
+          </div>
+          <div class="col-6 d-flex align-items-center">
+            <div class="form-check form-switch ms-auto">
+              <input type="radio" class="form-check-input opcion-correcta" name="respuesta_correcta[1]" value="0">
+              <label class="form-check-label">&nbsp;</label>
+            </div>
+          </div>
+        </div>
+        <hr class="mt-2 mb-2" />
+
+        <!-- Opción 2 -->
+        <div class="row align-items-center opcion">
+          <div class="col-6 pt-1 pb-1">
+            <input type="text" class="form-control opcion-text" name="opcion[1][]" placeholder="Ingrese opción 2">
+          </div>
+          <div class="col-6 d-flex align-items-center">
+            <div class="form-check form-switch ms-auto">
+              <input type="radio" class="form-check-input opcion-correcta" name="respuesta_correcta[1]" value="1">
+              <label class="form-check-label">&nbsp;</label>
+            </div>
+          </div>
+        </div>
+        <hr class="mt-2 mb-2" />
+
+        <!-- Opción 3 -->
+        <div class="row align-items-center opcion">
+          <div class="col-6 pt-1 pb-1">
+            <input type="text" class="form-control opcion-text" name="opcion[1][]" placeholder="Ingrese opción 3">
+          </div>
+          <div class="col-6 d-flex align-items-center">
+            <div class="form-check form-switch ms-auto">
+              <input type="radio" class="form-check-input opcion-correcta" name="respuesta_correcta[1]" value="2">
+              <label class="form-check-label">&nbsp;</label>
+            </div>
+          </div>
+        </div>
+        <hr class="mt-2 mb-2" />
+
+        <!-- Opción 4 -->
+        <div class="row align-items-center opcion">
+          <div class="col-6 pt-1 pb-1">
+            <input type="text" class="form-control opcion-text" name="opcion[1][]" placeholder="Ingrese opción 4">
+          </div>
+          <div class="col-6 d-flex align-items-center">
+            <div class="form-check form-switch ms-auto">
+              <input type="radio" class="form-check-input opcion-correcta" name="respuesta_correcta[1]" value="3">
+              <label class="form-check-label">&nbsp;</label>
+            </div>
+          </div>
+        </div>
+        <hr class="mt-2 mb-2" />
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- FIN PREGUNTA 2 -->
+
+<!-- PREGUNTA 3 -->
+<div class="card border-0 mb-4">
+  <div class="card-body bg-light rounded-bottom">
+    <div class="form-group mb-0">
+      <label class="form-label">Pregunta 3</label>
+      <input type="text" class="form-control" id="pregunta3" name="pregunta[]" placeholder="Ingrese la pregunta aquí..">
+      <hr class="mt-2 mb-2" />
+
+      <div class="opciones-container">
+        <!-- Opción 1 -->
+        <div class="row align-items-center opcion">
+          <div class="col-6 pt-1 pb-1">
+            <input type="text" class="form-control opcion-text" name="opcion[2][]" placeholder="Ingrese opción 1">
+          </div>
+          <div class="col-6 d-flex align-items-center">
+            <div class="form-check form-switch ms-auto">
+              <input type="radio" class="form-check-input opcion-correcta" name="respuesta_correcta[2]" value="0">
+              <label class="form-check-label">&nbsp;</label>
+            </div>
+          </div>
+        </div>
+        <hr class="mt-2 mb-2" />
+
+        <!-- Opción 2 -->
+        <div class="row align-items-center opcion">
+          <div class="col-6 pt-1 pb-1">
+            <input type="text" class="form-control opcion-text" name="opcion[2][]" placeholder="Ingrese opción 2">
+          </div>
+          <div class="col-6 d-flex align-items-center">
+            <div class="form-check form-switch ms-auto">
+              <input type="radio" class="form-check-input opcion-correcta" name="respuesta_correcta[2]" value="1">
+              <label class="form-check-label">&nbsp;</label>
+            </div>
+          </div>
+        </div>
+        <hr class="mt-2 mb-2" />
+
+        <!-- Opción 3 -->
+        <div class="row align-items-center opcion">
+          <div class="col-6 pt-1 pb-1">
+            <input type="text" class="form-control opcion-text" name="opcion[2][]" placeholder="Ingrese opción 3">
+          </div>
+          <div class="col-6 d-flex align-items-center">
+            <div class="form-check form-switch ms-auto">
+              <input type="radio" class="form-check-input opcion-correcta" name="respuesta_correcta[2]" value="2">
+              <label class="form-check-label">&nbsp;</label>
+            </div>
+          </div>
+        </div>
+        <hr class="mt-2 mb-2" />
+
+        <!-- Opción 4 -->
+        <div class="row align-items-center opcion">
+          <div class="col-6 pt-1 pb-1">
+            <input type="text" class="form-control opcion-text" name="opcion[2][]" placeholder="Ingrese opción 4">
+          </div>
+          <div class="col-6 d-flex align-items-center">
+            <div class="form-check form-switch ms-auto">
+              <input type="radio" class="form-check-input opcion-correcta" name="respuesta_correcta[2]" value="3">
+              <label class="form-check-label">&nbsp;</label>
+            </div>
+          </div>
+        </div>
+        <hr class="mt-2 mb-2" />
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- FIN PREGUNTA 3 -->
+
+<!-- PREGUNTA 4 -->
+<div class="card border-0 mb-4">
+  <div class="card-body bg-light rounded-bottom">
+    <div class="form-group mb-0">
+      <label class="form-label">Pregunta 4</label>
+      <input type="text" class="form-control" id="pregunta4" name="pregunta[]" placeholder="Ingrese la pregunta aquí..">
+      <hr class="mt-2 mb-2" />
+
+      <div class="opciones-container">
+        <!-- Opción 1 -->
+        <div class="row align-items-center opcion">
+          <div class="col-6 pt-1 pb-1">
+            <input type="text" class="form-control opcion-text" name="opcion[3][]" placeholder="Ingrese opción 1">
+          </div>
+          <div class="col-6 d-flex align-items-center">
+            <div class="form-check form-switch ms-auto">
+              <input type="radio" class="form-check-input opcion-correcta" name="respuesta_correcta[3]" value="0">
+              <label class="form-check-label">&nbsp;</label>
+            </div>
+          </div>
+        </div>
+        <hr class="mt-2 mb-2" />
+
+        <!-- Opción 2 -->
+        <div class="row align-items-center opcion">
+          <div class="col-6 pt-1 pb-1">
+            <input type="text" class="form-control opcion-text" name="opcion[3][]" placeholder="Ingrese opción 2">
+          </div>
+          <div class="col-6 d-flex align-items-center">
+            <div class="form-check form-switch ms-auto">
+              <input type="radio" class="form-check-input opcion-correcta" name="respuesta_correcta[3]" value="1">
+              <label class="form-check-label">&nbsp;</label>
+            </div>
+          </div>
+        </div>
+        <hr class="mt-2 mb-2" />
+
+        <!-- Opción 3 -->
+        <div class="row align-items-center opcion">
+          <div class="col-6 pt-1 pb-1">
+            <input type="text" class="form-control opcion-text" name="opcion[3][]" placeholder="Ingrese opción 3">
+          </div>
+          <div class="col-6 d-flex align-items-center">
+            <div class="form-check form-switch ms-auto">
+              <input type="radio" class="form-check-input opcion-correcta" name="respuesta_correcta[3]" value="2">
+              <label class="form-check-label">&nbsp;</label>
+            </div>
+          </div>
+        </div>
+        <hr class="mt-2 mb-2" />
+
+        <!-- Opción 4 -->
+        <div class="row align-items-center opcion">
+          <div class="col-6 pt-1 pb-1">
+            <input type="text" class="form-control opcion-text" name="opcion[3][]" placeholder="Ingrese opción 4">
+          </div>
+          <div class="col-6 d-flex align-items-center">
+            <div class="form-check form-switch ms-auto">
+              <input type="radio" class="form-check-input opcion-correcta" name="respuesta_correcta[3]" value="3">
+              <label class="form-check-label">&nbsp;</label>
+            </div>
+          </div>
+        </div>
+        <hr class="mt-2 mb-2" />
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- FIN PREGUNTA 4 -->
+
+<!-- PREGUNTA 5 -->
+<div class="card border-0 mb-4">
+  <div class="card-body bg-light rounded-bottom">
+    <div class="form-group mb-0">
+      <label class="form-label">Pregunta 5</label>
+      <input type="text" class="form-control" id="pregunta5" name="pregunta[]" placeholder="Ingrese la pregunta aquí..">
+      <hr class="mt-2 mb-2" />
+
+      <div class="opciones-container">
+        <!-- Opción 1 -->
+        <div class="row align-items-center opcion">
+          <div class="col-6 pt-1 pb-1">
+            <input type="text" class="form-control opcion-text" name="opcion[4][]" placeholder="Ingrese opción 1">
+          </div>
+          <div class="col-6 d-flex align-items-center">
+            <div class="form-check form-switch ms-auto">
+              <input type="radio" class="form-check-input opcion-correcta" name="respuesta_correcta[4]" value="0">
+              <label class="form-check-label">&nbsp;</label>
+            </div>
+          </div>
+        </div>
+        <hr class="mt-2 mb-2" />
+
+        <!-- Opción 2 -->
+        <div class="row align-items-center opcion">
+          <div class="col-6 pt-1 pb-1">
+            <input type="text" class="form-control opcion-text" name="opcion[4][]" placeholder="Ingrese opción 2">
+          </div>
+          <div class="col-6 d-flex align-items-center">
+            <div class="form-check form-switch ms-auto">
+              <input type="radio" class="form-check-input opcion-correcta" name="respuesta_correcta[4]" value="1">
+              <label class="form-check-label">&nbsp;</label>
+            </div>
+          </div>
+        </div>
+        <hr class="mt-2 mb-2" />
+
+        <!-- Opción 3 -->
+        <div class="row align-items-center opcion">
+          <div class="col-6 pt-1 pb-1">
+            <input type="text" class="form-control opcion-text" name="opcion[4][]" placeholder="Ingrese opción 3">
+          </div>
+          <div class="col-6 d-flex align-items-center">
+            <div class="form-check form-switch ms-auto">
+              <input type="radio" class="form-check-input opcion-correcta" name="respuesta_correcta[4]" value="2">
+              <label class="form-check-label">&nbsp;</label>
+            </div>
+          </div>
+        </div>
+        <hr class="mt-2 mb-2" />
+
+        <!-- Opción 4 -->
+        <div class="row align-items-center opcion">
+          <div class="col-6 pt-1 pb-1">
+            <input type="text" class="form-control opcion-text" name="opcion[4][]" placeholder="Ingrese opción 4">
+          </div>
+          <div class="col-6 d-flex align-items-center">
+            <div class="form-check form-switch ms-auto">
+              <input type="radio" class="form-check-input opcion-correcta" name="respuesta_correcta[4]" value="3">
+              <label class="form-check-label">&nbsp;</label>
+            </div>
+          </div>
+        </div>
+        <hr class="mt-2 mb-2" />
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- FIN PREGUNTA 5 -->
+            <div style="display: flex; justify-content: space-between">
+              <a routerLink="/primerafase" class="btn btn-success" (click)="scrollToTop()">
+                <i class="fa fa-arrow-left"></i> Paso anterior
+              </a>
+              <a routerLink="/tercerafase" class="btn btn-success" (click)="scrollToTop()">
+                Siguiente paso <i class="fa fa-arrow-right"></i>
+              </a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

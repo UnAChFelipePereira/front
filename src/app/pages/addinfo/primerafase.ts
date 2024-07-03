@@ -3,13 +3,13 @@ import { Editor } from 'ngx-editor';
 import Tagify from '@yaireo/tagify'
 
 @Component({
-  selector: 'addinfo',
-  templateUrl: './addinfo.html',
+  selector: 'primerafase',
+  templateUrl: './primerafase.html',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: [ './addinfo.css' ]
+  styleUrls: [ './primerafase.css' ]
 })
 
-export class AddInfo {
+export class Primerafase {
 	editor: Editor;
   html: '';
   
@@ -28,4 +28,9 @@ export class AddInfo {
     	new Tagify(tagElm);
     });
   }
+
+  scrollToTop() {
+    window.scrollTo(0, 0);
+  }
+
 }

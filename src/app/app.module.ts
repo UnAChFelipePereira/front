@@ -154,12 +154,17 @@ import { ResetPasswordV1Page } from './pages/resetPassword/resetPassword-v1';
 //cursos
 
 import { BuscarCursosPage } from './pages/vercursos/buscar-cursos';
+import { MisCursosPage } from './pages/miscursos/mis-cursos';
 
 //cursos
 
 import { SettingsPageV1 } from './pages/perfil/settings-page';
-import { AddPage } from './pages/addpage/addpage';
-import { AddInfo } from './pages/addinfo/addinfo';
+import {Crearcurso } from './pages/addpage/crearcurso';
+import { Primerafase } from './pages/addinfo/primerafase';
+import { Segundafase } from './pages/addinfo/segundafase';
+import { Tercerafase } from './pages/addinfo/tercerafase';
+import { Cuartafase } from './pages/addinfo/cuartafase';
+import { Quintafase } from './pages/addinfo/quintafase';
 
 //Inicio
 
@@ -170,6 +175,8 @@ import { HelperCssPage }            from './pages/helper/helper-css/helper-css';
 
 // Error
 import { ErrorPage }                from './pages/error/error';
+
+
 
 
 
@@ -281,8 +288,13 @@ import { ErrorPage }                from './pages/error/error';
 
     InicioPage,
     BuscarCursosPage,
-    AddPage,
-    AddInfo,
+    MisCursosPage,
+    Crearcurso,
+    Primerafase,
+    Segundafase,
+    Tercerafase,
+    Cuartafase,
+    Quintafase,
     
     HelperCssPage,
     

@@ -126,18 +126,25 @@ import { SettingsPageV1 } from './pages/perfil/settings-page';
 //plataforma
 
 import { BuscarCursosPage } from './pages/vercursos/buscar-cursos';
+import { MisCursosPage } from './pages/miscursos/mis-cursos';
 
 //Inicio
 import { InicioPage } from './pages/inicio/Inicio';
 //curso
-import { AddPage } from './pages/addpage/addpage';
-import { AddInfo } from './pages/addinfo/addinfo';
+import { Crearcurso } from './pages/addpage/crearcurso';
+import { Primerafase } from './pages/addinfo/primerafase';
+import { Segundafase } from './pages/addinfo/segundafase';
+import { Tercerafase } from './pages/addinfo/tercerafase';
+import { Cuartafase } from './pages/addinfo/cuartafase';
+import { Quintafase } from './pages/addinfo/quintafase';
 
 // Helper
 import { HelperCssPage }            from './pages/helper/helper-css/helper-css';
 
 // Error
 import { ErrorPage }                from './pages/error/error';
+
+
 //import { title } from 'process';
 
 const routes: Routes = [
@@ -158,9 +165,13 @@ const routes: Routes = [
   //cursos
 
   {path:'buscar-cursos', component:BuscarCursosPage, data: {title: 'Buscar cursos'},canActivate: [AuthService]},
-  {path:'addpage', component:AddPage, data: {title: 'Crear Curso'},canActivate: [AuthService]},
-  { path: 'addinfo', component: AddInfo, data: { title: 'Crear Curso'}, canActivate: [AuthService] },
-
+  {path:'mis-cursos', component:MisCursosPage, data: {title: 'Mis cursos'},canActivate: [AuthService]},
+  {path:'crearcurso', component:Crearcurso, data: {title: 'Crear Curso'},canActivate: [AuthService]},
+  { path: 'primerafase', component: Primerafase, data: { title: 'Primera fase'}, canActivate: [AuthService] },
+  { path: 'segundafase', component: Segundafase, data: { title: 'Segunda fase'}, canActivate: [AuthService] },
+  { path: 'tercerafase', component: Tercerafase, data: { title: 'Tercera fase'}, canActivate: [AuthService] },
+  { path: 'cuartafase', component: Cuartafase, data: { title: 'Cuarta fase'}, canActivate: [AuthService] },
+  { path: 'quintafase', component: Quintafase, data: { title: 'Quinta fase'}, canActivate: [AuthService] },
   //cursos
 
   { path: 'email/inbox', component: EmailInboxPage, data: { title: 'Email Inbox'}, canActivate: [AuthService]},
