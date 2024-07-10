@@ -165,6 +165,9 @@ import { Segundafase } from './pages/addinfo/segundafase';
 import { Tercerafase } from './pages/addinfo/tercerafase';
 import { Cuartafase } from './pages/addinfo/cuartafase';
 import { Quintafase } from './pages/addinfo/quintafase';
+import { Sextafase } from './pages/addinfo/sextafase';
+
+
 
 //Inicio
 
@@ -175,6 +178,7 @@ import { HelperCssPage }            from './pages/helper/helper-css/helper-css';
 
 // Error
 import { ErrorPage }                from './pages/error/error';
+
 
 
 
@@ -295,7 +299,7 @@ import { ErrorPage }                from './pages/error/error';
     Tercerafase,
     Cuartafase,
     Quintafase,
-    
+    Sextafase,
     HelperCssPage,
     
     ErrorPage

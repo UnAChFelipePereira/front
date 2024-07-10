@@ -137,12 +137,14 @@ import { Segundafase } from './pages/addinfo/segundafase';
 import { Tercerafase } from './pages/addinfo/tercerafase';
 import { Cuartafase } from './pages/addinfo/cuartafase';
 import { Quintafase } from './pages/addinfo/quintafase';
+import { Sextafase } from './pages/addinfo/sextafase';
 
 // Helper
 import { HelperCssPage }            from './pages/helper/helper-css/helper-css';
 
 // Error
 import { ErrorPage }                from './pages/error/error';
+
 
 
 //import { title } from 'process';
@@ -172,6 +174,7 @@ const routes: Routes = [
   { path: 'tercerafase', component: Tercerafase, data: { title: 'Tercera fase'}, canActivate: [AuthService] },
   { path: 'cuartafase', component: Cuartafase, data: { title: 'Cuarta fase'}, canActivate: [AuthService] },
   { path: 'quintafase', component: Quintafase, data: { title: 'Quinta fase'}, canActivate: [AuthService] },
+  { path: 'sextafase', component: Sextafase, data: { title: 'Sexta fase'}, canActivate: [AuthService] },
   //cursos
 
   { path: 'email/inbox', component: EmailInboxPage, data: { title: 'Email Inbox'}, canActivate: [AuthService]},

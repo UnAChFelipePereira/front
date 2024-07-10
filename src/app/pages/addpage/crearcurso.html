@@ -1,104 +1,155 @@
 <div class="nav-wizards-container">
   <nav class="nav nav-wizards-1 mb-2">
-      <!-- completed -->
-      <div class="nav-item col">
-          <a class="nav-link active" href="/addpage">
-              <div class="nav-no">1</div>
-              <div class="nav-text">Datos del curso</div>
-          </a>
-      </div>
-
-      <!-- active -->
-      <div class="nav-item col">
-          <a class="nav-link disabled" href="/addinfo">
-              <div class="nav-no">2</div>
-              <div class="nav-text">Primera fase</div>
-          </a>
-      </div>
-
-      <!-- disabled -->
-      <div class="nav-item col">
-          <a class="nav-link disabled" href="#">
-              <div class="nav-no">3</div>
-              <div class="nav-text">Segunda fase</div>
-          </a>
-      </div>
-
-      <div class="nav-item col">
-          <a class="nav-link disabled" href="#">
-              <div class="nav-no">4</div>
-              <div class="nav-text">Tercera fase</div>
-          </a>
-      </div>
-
-      <div class="nav-item col">
-          <a class="nav-link disabled" href="#">
-              <div class="nav-no">5</div>
-              <div class="nav-text">Cuarta fase</div>
-          </a>
-      </div>
-
-      <div class="nav-item col">
-          <a class="nav-link disabled" href="#">
-              <div class="nav-no">6</div>
-              <div class="nav-text">Quinta fase</div>
-          </a>
-      </div>
+    <div class="nav-item col">
+      <a class="nav-link active" href="/addpage">
+        <div class="nav-no">1</div>
+        <div class="nav-text">Datos del curso</div>
+      </a>
+    </div>
+    <div class="nav-item col">
+      <a class="nav-link disabled" href="/addinfo">
+        <div class="nav-no">2</div>
+        <div class="nav-text">Primera fase</div>
+      </a>
+    </div>
+    <div class="nav-item col">
+      <a class="nav-link disabled" href="#">
+        <div class="nav-no">3</div>
+        <div class="nav-text">Segunda fase</div>
+      </a>
+    </div>
+    <div class="nav-item col">
+      <a class="nav-link disabled" href="#">
+        <div class="nav-no">4</div>
+        <div class="nav-text">Tercera fase</div>
+      </a>
+    </div>
+    <div class="nav-item col">
+      <a class="nav-link disabled" href="#">
+        <div class="nav-no">5</div>
+        <div class="nav-text">Cuarta fase</div>
+      </a>
+    </div>
+    <div class="nav-item col">
+      <a class="nav-link disabled" href="#">
+        <div class="nav-no">6</div>
+        <div class="nav-text">Quinta fase</div>
+      </a>
+    </div>
+    <div class="nav-item col">
+      <a class="nav-link disabled" href="#">
+        <div class="nav-no">7</div>
+        <div class="nav-text">Resumen</div>
+      </a>
+    </div>
   </nav>
 </div>
 
 <div class="card">
   <div class="card-body">
+    <form #f="ngForm" (ngSubmit)="formSubmit(f)" class="fs-13px">
       <div class="container">
-          <div class="row justify-content-center">
-              <div class="col-xl-8">
-                  <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
-                      <div class="card border-0 mb-4">
-                          <div class="card-header h6 mb-0 bg-none p-3">
-                              <i class="fas fa-pencil-alt fa-fw text-dark text-opacity-50 me-1"></i> Información del
-                              curso
-                          </div>
-                          <div class="card-body">
-                              <div class="mb-3">
-                                  <label class="form-label">Nombre del curso</label>
-                                  <input type="text" class="form-control" formControlName="courseName"
-                                      placeholder="Ej: Curso Base de datos.">
-                              </div>
-                              <div class="mb-3">
-                                  <label class="form-label">Profesor</label>
-                                  <input type="text" class="form-control" formControlName="professor"
-                                      placeholder="Ej: Profesor Juan Perez">
-                              </div>
-                              <div class="mb-3">
-                                  <label class="form-label">Descripción del curso</label>
-                                  <textarea class="form-control" formControlName="Descripcioncurso"
-                                      placeholder="Este curso tratará...." rows="4"></textarea>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="card border-0 mb-4">
-                          <div class="card-header h6 mb-0 bg-none p-3">
-                              <i class="fa fa-file-image fa-lg fa-fw text-dark text-opacity-50 me-1"></i> Icono del
-                              curso
-                          </div>
-                          <div class="card-body">
-                              <div id="dropzone">
-                                  <form action="/upload" class="dropzone needsclick" id="demo-upload">
-                                      <div class="dz-message needsclick">
-                                          Arrastra el icono <b>aquí</b> o has <b>clic</b> para subir.<br />
-                                      </div>
-                                  </form>
-                              </div>
-                          </div>
-                      </div>
-                      <p style="display: flex; justify-content: flex-end;">
-                          <button type="submit" class="btn btn-success" [disabled]="!courseForm.valid">
-                              Siguiente paso <i class="fa fa-arrow-right"></i>
-                          </button>
-                      </p>
-                  </form>
+        <div class="row justify-content-center">
+          <div class="col-xl-8">
+            <div class="register-content">
+              <div class="card border-0 mb-4">
+                <div class="card-header h6 mb-0 bg-none p-3">
+                  <i
+                    class="fas fa-pencil-alt fa-fw text-dark text-opacity-50 me-1"
+                  ></i>
+                  Información del curso
+                </div>
+                <div class="card-body">
+                  <div class="mb-3">
+                    <label class="form-label">Nombre del curso</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="nombre_curso"
+                      id="nombre_curso"
+                      placeholder="Ej: Curso Base de datos."
+                      [(ngModel)]="cursoData.nombre_curso"
+                      required
+                      (ngModelChange)="saveToLocalStorage()"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Profesor</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="nombre_profesor"
+                      id="nombre_profesor"
+                      placeholder="Ej: Profesor Juan Perez"
+                      [(ngModel)]="cursoData.nombre_profesor"
+                      required
+                      (ngModelChange)="saveToLocalStorage()"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Descripción del curso</label>
+                    <textarea
+                      class="form-control"
+                      name="descripcion"
+                      id="descripcion"
+                      placeholder="Este curso tratará...."
+                      rows="4"
+                      [(ngModel)]="cursoData.descripcion"
+                      required
+                      (ngModelChange)="saveToLocalStorage()"
+                    ></textarea>
+                  </div>
+                </div>
               </div>
+              <div class="card border-0 mb-4">
+                <div class="card-header h6 mb-0 bg-none p-3">
+                  <i
+                    class="fa fa-file-image fa-lg fa-fw text-dark text-opacity-50 me-1"
+                  ></i>
+                  Icono del curso
+                </div>
+                <div class="card-body">
+                  <div class="mb-3">
+                    <label class="form-label">Subir icono</label>
+                    <input
+                      type="file"
+                      class="form-control"
+                      (change)="onFileChange($event)"
+                    />
+                    <div *ngIf="cursoData.iconocursoNombre" class="mt-2">
+                      Archivo seleccionado: {{ cursoData.iconocursoNombre }}
+                    </div>
+                  </div>
+                  <div *ngIf="cursoData.iconocurso">
+                    <img
+                      [src]="cursoData.iconocurso"
+                      alt="Icono del curso"
+                      class="img-thumbnail"
+                      style="max-width: 200px"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="alert"
+                  role="alert"
+                  [ngClass]="{'alert-danger': showError, 'alert-success': showSuccess}"
+                >
+                  {{ alertMessage }}
+                </div>
+              </div>
+              <div style="display: flex; justify-content: right">
+                <a
+                  routerLink="/primerafase"
+                  class="btn btn-success"
+                  (click)="scrollToTop()"
+                >
+                  Siguiente paso <i class="fa fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
           </div>
+        </div>
       </div>
+    </form>
   </div>
 </div>

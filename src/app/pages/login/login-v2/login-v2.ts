@@ -25,6 +25,7 @@ export class LoginV2Page {
 
           localStorage.setItem('access_token', response.access_token);
           localStorage.setItem('refresh_token', response.refresh_token);
+          localStorage.setItem('user_Id', response.user._id);
 
           console.log(response.access_token)
           console.log(response.refresh_token)

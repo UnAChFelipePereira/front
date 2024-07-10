@@ -94,6 +94,9 @@ formSubmit(f: NgForm) {
     this.authService.login(formData.email, formData.password).subscribe(
       response => {
         console.log('Respuesta del inicio de sesión:', response);
+        localStorage.setItem('user_Id', response.user._id);
+        // localStorage.setItem('_id', response._id);
+        // console.log(response._id)
         // Navegar al dashboard u otra página según la lógica de tu aplicación
         this.router.navigate(['inicio']);
       },
