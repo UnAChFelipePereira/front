@@ -36,6 +36,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
 
+
 	
     // page settings
     if (this.appSettings.appDarkMode) {

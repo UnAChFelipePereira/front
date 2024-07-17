@@ -1,94 +1,64 @@
-<!-- BEGIN breadcrumb -->
-<ol class="breadcrumb float-xl-end">
-    <li class="breadcrumb-item"><a href="/inicio">Inicio</a></li>
-    <li class="breadcrumb-item active">Mis cursos</li>
-</ol>
-<!-- END breadcrumb -->
-<!-- BEGIN page-header -->
-<h1 class="page-header">Buscar mis cursos</h1>
-<!-- END page-header -->
-<!-- BEGIN row -->
-<div class="row">
-    <!-- BEGIN col-12 -->
+<ul class="breadcrumb">
+  <li class="breadcrumb-item"><a href="/inicio">Inicio</a></li>
+  <li class="breadcrumb-item active">Mis Cursos</li>
+</ul>
+
+<h1 class="page-header">Mis Cursos</h1>
+
+<div class="container">
+  <div class="row">
     <div class="col-md-12">
-        <!-- BEGIN input-group -->
+      <form (submit)="buscarCursos()">
         <div class="input-group input-group-lg mb-3">
-            <input type="text" class="form-control input-white" placeholder="Ingrese palabras claves aquí.." />
-            <button type="button" class="btn btn-primary"><i class="fa fa-search fa-fw"></i> Buscar</button>
+          <input
+            type="text"
+            class="form-control input-white"
+            placeholder="Ingrese palabras claves aquí.."
+            [(ngModel)]="terminoBusqueda"
+            name="terminoBusqueda"
+          />
+          <button type="submit" class="btn btn-primary">
+            <i class="fa fa-search fa-fw"></i> Buscar
+          </button>
         </div>
-        <!-- END input-group -->
-        
-        <!-- BEGIN filter-pagination -->
-        <div class="d-block d-md-flex align-items-center mb-3">
-            <!-- BEGIN filter -->
-            <div class="d-flex">
-                <!-- BEGIN dropdown -->
-                <div class="dropdown me-2">
-                    <a href="#" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown">
-                        Filtrar por <b class="caret"></b>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-start" role="menu">
-                        <a href="javascript:;" class="dropdown-item">Categoria</a>
-                        <a href="javascript:;" class="dropdown-item">Fecha</a>
-                        <a href="javascript:;" class="dropdown-item">Puntuación</a>
-                    </div>
-                </div>
-                <!-- END dropdown -->
-                <!-- BEGIN btn-group -->
-                <!-- <div class="btn-group">
-                    <a href="javascript:;" class="btn btn-white"><i class="fa fa-list"></i></a>
-                    <a href="javascript:;" class="btn btn-white"><i class="fa fa-th"></i></a>
-                    <a href="javascript:;" class="btn btn-white"><i class="fa fa-th-large"></i></a>
-                </div> -->
-                <!-- END btn-group -->
+      </form>
+
+      <div class="result-list">
+        <!-- Alerta de error o éxito -->
+        <div class="position-fixed top-50 start-50 translate-middle" *ngIf="showError || showSuccess">
+          <div class="alert alert-dismissible fade show" role="alert"
+               [ngClass]="{'alert-danger': showError, 'alert-success': showSuccess}">
+            {{ alertMessage }}
+            <button type="button" class="btn-close" aria-label="Close" (click)="hideAlerts()"></button>
+          </div>
+        </div>
+
+        <div *ngIf="cursosInscritos.length > 0" class="result-list">
+          <div class="result-item" *ngFor="let curso of cursosInscritos">
+            <a class="result-image" [style.backgroundImage]="'url(' + curso.iconocursoNombre + ')'"
+               [title]="curso.nombre_curso"></a>
+            <div class="result-info">
+              <h4 class="title">
+                <a href="javascript:;">{{ curso.nombre_curso }}</a>
+              </h4>
+              <p class="location">Profesor: {{ curso.nombre_profesor }}</p>
+              <p class="desc">{{ curso.descripcion }}</p>
             </div>
-            <!-- END filter -->
-            <!-- BEGIN pagination -->
-            <!-- <div class="ms-auto d-none d-lg-block">
-                <ul class="pagination mb-0">
-                    <li class="page-item disabled"><a href="javascript:;" class="page-link">«</a></li>
-                    <li class="page-item active"><a href="javascript:;" class="page-link">1</a></li>
-                    <li class="page-item"><a href="javascript:;" class="page-link">»</a></li>
-                </ul>
-            </div> -->
-            <!-- END pagination -->
-        </div>
-        <!-- END filter-pagination -->
-        
-        <!-- BEGIN result-list -->
-        <div class="result-list">
-            <div class="result-item" *ngFor="let curso of cursosInscritos">
-                <a href="#" class="result-image" [style.background-image]="'url(' + curso.imagen + ')'"></a>
-                <div class="result-info">
-                    <h4 class="title"><a href="javascript:;">{{ curso.nombre }}</a></h4>
-                    <p class="location">Profesor {{ curso.profesor }}</p>
-                    <p class="desc">
-                        {{ curso.descripcion }}
-                    </p>
-                </div>
-                <div class="result-price">
-                    <a href="javascript:;" class="btn btn-yellow d-block w-100">View Details</a>
-                </div>
+
+            <div class="result-price">
+              <a href="javascript:;" class="btn btn-yellow d-block w-100" (click)="realizarCurso(curso._id)">Realizar
+                curso</a>
             </div>
+          </div>
         </div>
-        <!-- END result-list -->
-        
-        <!-- BEGIN pagination -->
-        <div class="d-flex mt-20px">
-            <ul class="pagination ms-auto me-auto me-lg-0">
-                <li class="page-item disabled"><a href="javascript:;" class="page-link">«</a></li>
-                <li class="page-item active"><a href="javascript:;" class="page-link">1</a></li>
-                <li class="page-item"><a href="javascript:;" class="page-link">»</a></li>
-                <!-- <li class="page-item"><a href="javascript:;" class="page-link">3</a></li>
-                <li class="page-item"><a href="javascript:;" class="page-link">4</a></li>
-                <li class="page-item"><a href="javascript:;" class="page-link">5</a></li>
-                <li class="page-item"><a href="javascript:;" class="page-link">6</a></li>
-                <li class="page-item"><a href="javascript:;" class="page-link">7</a></li>
-                <li class="page-item"><a href="javascript:;" class="page-link">»</a></li> -->
-            </ul>
+
+        <div *ngIf="cursosInscritos.length === 0 && terminoBusqueda.trim() !== ''" class="no-results">
+          No se encontraron cursos que coincidan con "{{ terminoBusqueda }}"
         </div>
-        <!-- END pagination -->
+        <div *ngIf="cursosInscritos.length === 0 && terminoBusqueda.trim() === ''" class="no-results">
+          No se encontraron cursos inscritos.
+        </div>
+      </div>
     </div>
-    <!-- END col-12 -->
+  </div>
 </div>
-<!-- END row -->

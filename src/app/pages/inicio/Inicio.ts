@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { AppMenuService } from '../../service/app-menus.service';
 
+
 @Component({
   selector: 'Inicio',
-  templateUrl: './Inicio.html'
+  templateUrl: './Inicio.html',
+  styleUrls:['./Inicio.css']
 })
 
 export class InicioPage {
@@ -13,7 +15,8 @@ export class InicioPage {
   user_Id: string;
 
   ngOnInit() {
-    this.menus = this.appMenuService.getAppMenus(); 
+
+    this.menus = this.appMenuService.miMenu(); 
     this.userName = localStorage.getItem('userName');
     this.userLastName = localStorage.getItem('userLastName');
     this.user_Id = localStorage.getItem('user_Id');

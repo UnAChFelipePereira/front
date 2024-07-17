@@ -19,7 +19,6 @@ import { SidebarRightComponent }           from './components/sidebar-right/side
 import { TopMenuComponent }                from './components/top-menu/top-menu.component';
 import { PanelComponent }                  from './components/panel/panel.component';
 import { FloatSubMenuComponent }           from './components/float-sub-menu/float-sub-menu.component';
-import { ThemePanelComponent }             from './components/theme-panel/theme-panel.component';
 import { AuthService }                     from './components/auth/auth.service';
 
 // Component Module
@@ -155,21 +154,23 @@ import { ResetPasswordV1Page } from './pages/resetPassword/resetPassword-v1';
 
 import { BuscarCursosPage } from './pages/vercursos/buscar-cursos';
 import { MisCursosPage } from './pages/miscursos/mis-cursos';
-
+import { HacerPrimerafase } from './pages/hacercurso/primera_fase';
+import { HacerSegundafase } from './pages/hacercurso/segunda_fase';
+import { HacerTercerafase } from './pages/hacercurso/tercera_fase';
+import { HacerCuartafase } from './pages/hacercurso/cuarta_fase';
+import { HacerQuintafase } from './pages/hacercurso/quinta_fase';
 //cursos
 
 import { SettingsPageV1 } from './pages/perfil/settings-page';
-import {Crearcurso } from './pages/addpage/crearcurso';
-import { Primerafase } from './pages/addinfo/primerafase';
-import { Segundafase } from './pages/addinfo/segundafase';
-import { Tercerafase } from './pages/addinfo/tercerafase';
-import { Cuartafase } from './pages/addinfo/cuartafase';
-import { Quintafase } from './pages/addinfo/quintafase';
-import { Sextafase } from './pages/addinfo/sextafase';
-
+import { Crear_curso } from './pages/addinfo/crear_curso';
+import { ConfiguracionCurso } from './pages/vercursos/configuracion_curso';
+//Progreso
+import { MiProgreso } from './pages/progreso/mi_progreso';
+import { ProgresoEstudiantes } from './pages/progreso/progreso_estudiante';
 
 
 //Inicio
+
 
 import { InicioPage } from './pages/inicio/Inicio';
 
@@ -178,6 +179,7 @@ import { HelperCssPage }            from './pages/helper/helper-css/helper-css';
 
 // Error
 import { ErrorPage }                from './pages/error/error';
+
 
 
 
@@ -193,7 +195,7 @@ import { ErrorPage }                from './pages/error/error';
     TopMenuComponent,
     PanelComponent,
     FloatSubMenuComponent,
-    ThemePanelComponent,
+
     
     DashboardV1Page,
     DashboardV2Page,
@@ -293,13 +295,15 @@ import { ErrorPage }                from './pages/error/error';
     InicioPage,
     BuscarCursosPage,
     MisCursosPage,
-    Crearcurso,
-    Primerafase,
-    Segundafase,
-    Tercerafase,
-    Cuartafase,
-    Quintafase,
-    Sextafase,
+    Crear_curso,
+    HacerPrimerafase,
+    HacerSegundafase,
+    HacerTercerafase,
+    HacerCuartafase,
+    HacerQuintafase,
+    MiProgreso,
+    ProgresoEstudiantes,
+    ConfiguracionCurso,
     HelperCssPage,
     
     ErrorPage
@@ -360,7 +364,7 @@ export class AppModule {
   constructor(private router: Router, private titleService: Title, private route: ActivatedRoute) {
     router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
-        var title = 'Color Admin | ' + this.route.snapshot.firstChild.data['title'];
+        var title = 'Aula Virtual | ' + this.route.snapshot.firstChild.data['title'];
         this.titleService.setTitle(title);
       }
     });

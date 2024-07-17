@@ -1,0 +1,15 @@
+.card-body {
+    border-radius: 15px;
+}
+
+
+.btn-light-blue {
+    background-color: #155391; /* Azul más claro */
+    color: white;
+    border: none;
+}
+
+.btn-light-blue:hover {
+    background-color: #2a547e; /* Un poco más oscuro para el hover */
+    color: white;
+}

@@ -1,173 +1,74 @@
-<!-- BEGIN breadcrumb -->
-<ol class="breadcrumb float-xl-end">
+<ul class="breadcrumb">
   <li class="breadcrumb-item"><a href="/inicio">Inicio</a></li>
-  <li class="breadcrumb-item active">Cursos</li>
-</ol>
-<!-- END breadcrumb -->
-<!-- BEGIN page-header -->
-<h1 class="page-header">Buscar cursos</h1>
-<!-- END page-header -->
-<!-- BEGIN row -->
-<div class="row">
-  <!-- BEGIN col-12 -->
-  <div class="col-md-12">
-    <!-- BEGIN input-group -->
-    <div class="input-group input-group-lg mb-3">
-      <input
-        type="text"
-        class="form-control input-white"
-        placeholder="Ingrese palabras claves aquí.."
-      />
-      <button type="button" class="btn btn-primary">
-        <i class="fa fa-search fa-fw"></i> Buscar
-      </button>
-    </div>
-    <!-- END input-group -->
+  <li class="breadcrumb-item active">Buscar Cursos</li>
+</ul>
 
-    <!-- BEGIN filter-pagination -->
-    <div class="d-block d-md-flex align-items-center mb-3">
-      <!-- BEGIN filter -->
-      <div class="d-flex">
-        <!-- BEGIN dropdown -->
-        <div class="dropdown me-2">
-          <a
-            href="#"
-            class="btn btn-white dropdown-toggle"
-            data-bs-toggle="dropdown"
+<h1 class="page-header">Buscar Cursos</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <form (submit)="buscarCursos()">
+        <div class="input-group input-group-lg mb-3">
+          <input
+            type="text"
+            class="form-control input-white"
+            placeholder="Ingrese palabras claves aquí.."
+            [(ngModel)]="terminoBusqueda"
+            name="terminoBusqueda"
+          />
+          <button type="submit" class="btn btn-primary">
+            <i class="fa fa-search fa-fw"></i> Buscar
+          </button>
+        </div>
+      </form>
+
+      <div class="result-list">
+        <!-- Alerta de error o éxito -->
+        <div
+          class="position-fixed top-50 start-50 translate-middle"
+          *ngIf="showError || showSuccess"
+        >
+          <div
+            class="alert alert-dismissible fade show"
+            role="alert"
+            [ngClass]="{'alert-danger': showError, 'alert-success': showSuccess}"
           >
-            Filtrar por <b class="caret"></b>
-          </a>
-          <div class="dropdown-menu dropdown-menu-start" role="menu">
-            <a href="javascript:;" class="dropdown-item">Categoria</a>
-            <a href="javascript:;" class="dropdown-item">Fecha</a>
-            <a href="javascript:;" class="dropdown-item">Puntuación</a>
+            {{ alertMessage }}
+            <button type="button" class="btn-close" aria-label="Close" (click)="hideAlerts()"></button>
           </div>
         </div>
-        <!-- END dropdown -->
-        <!-- BEGIN btn-group -->
-        <!-- <div class="btn-group">
-					<a href="javascript:;" class="btn btn-white"><i class="fa fa-list"></i></a>
-					<a href="javascript:;" class="btn btn-white"><i class="fa fa-th"></i></a>
-					<a href="javascript:;" class="btn btn-white"><i class="fa fa-th-large"></i></a>
-				</div> -->
-        <!-- END btn-group -->
+
+        <div *ngIf="cursos.length > 0" class="result-list">
+          <div class="result-item" *ngFor="let curso of cursos">
+            <a
+              class="result-image"
+              [style.backgroundImage]="'url(' + curso.iconocursoNombre + ')'"
+              [title]="curso.nombre_curso"
+            ></a>
+            <div class="result-info">
+              <h4 class="title">
+                <a href="javascript:;">{{ curso.nombre_curso }}</a>
+              </h4>
+              <p class="location">Profesor: {{ curso.nombre_profesor }}</p>
+              <p class="desc">{{ curso.descripcion }}</p>
+            </div>
+
+            <div class="result-price">
+              <a
+                href="javascript:;"
+                class="btn btn-yellow d-block w-100"
+                (click)="enrollUserInCurso(curso._id)"
+              >
+                Inscribirme
+              </a>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="cursos.length === 0" class="no-results">
+          No se encontraron cursos.
+        </div>
       </div>
-      <!-- END filter -->
-      <!-- BEGIN pagination -->
-      <div class="ms-auto d-none d-lg-block">
-        <ul class="pagination mb-0">
-          <li class="page-item disabled">
-            <a href="javascript:;" class="page-link">«</a>
-          </li>
-          <li class="page-item active">
-            <a href="javascript:;" class="page-link">1</a>
-          </li>
-          <li class="page-item">
-            <a href="javascript:;" class="page-link">»</a>
-          </li>
-        </ul>
-      </div>
-      <!-- END pagination -->
     </div>
-    <!-- END filter-pagination -->
-
-    <!-- BEGIN result-list -->
-    <div class="result-list">
-      <div *ngIf="cursos.length > 0" class="result-list">
-		<div class="result-item" *ngFor="let curso of cursos">
-			<a href="#" class="result-image" [style.backgroundImage]="'url(' + curso.iconocurso + ')'"></a>
-			<div class="result-info">
-			  <h4 class="title"><a href="javascript:;">{{ curso.nombre_curso }}</a></h4>
-			  <p class="location">Profesor: {{ curso.nombre_profesor }}</p>
-			  <p class="desc">{{ curso.descripcion }}</p>
-			</div>
-			<div class="result-price">
-			  <a href="javascript:;" class="btn btn-yellow d-block w-100" (click)="enrollUserInCurso(curso.id)">Inscribirme</a>
-			</div>
-		  </div>
-      </div>
-
-      <div *ngIf="cursos.length === 0" class="no-results">
-        No se encontraron cursos.
-      </div>
-
-      <div *ngIf="cursos.length === 0" class="no-results">
-        No se encontraron cursos.
-      </div>
-
-      <!-- <div class="result-item">
-        <a
-          href="#"
-          class="result-image"
-          style="background-image: url(/assets/img/gallery/python.jpg)"
-        ></a>
-        <div class="result-info">
-          <h4 class="title">
-            <a href="javascript:;">Curso de Python nivel básico.</a>
-          </h4>
-          <p class="location">Profesor Juanito Perez</p>
-          <p class="desc">
-            Curso básico de Python ideal para principiantes, cubriendo desde los
-            fundamentos de la sintaxis hasta la resolución de problemas
-            prácticos con ejemplos claros y ejercicios interactivos.
-          </p>
-        </div>
-        <div class="result-price">
-          <a href="javascript:;" class="btn btn-yellow d-block w-100"
-            >Inscribirme</a
-          >
-        </div>
-      </div> -->
-
-      <!-- <div class="result-item">
-        <a
-          href="#"
-          class="result-image"
-          style="background-image: url(/assets/img/gallery/power.jpg)"
-        ></a>
-        <div class="result-info">
-          <h4 class="title">
-            <a href="javascript:;">Curso de PowerBI básico.</a>
-          </h4>
-          <p class="location">Profesor Alexis Sanchez</p>
-          <p class="desc">
-            Curso básico de Power BI diseñado para introducir a los alumnos en
-            la creación de informes interactivos y paneles dinámicos, explorando
-            desde la importación de datos hasta la visualización de insights
-            clave de manera efectiva.
-          </p>
-        </div>
-        <div class="result-price">
-          <a href="javascript:;" class="btn btn-yellow d-block w-100"
-            >Inscribirme</a
-          >
-        </div>
-      </div> -->
-    </div>
-    <!-- END result-list -->
-
-    <!-- BEGIN pagination -->
-    <div class="d-flex mt-20px">
-      <ul class="pagination ms-auto me-auto me-lg-0">
-        <li class="page-item disabled">
-          <a href="javascript:;" class="page-link">«</a>
-        </li>
-        <li class="page-item active">
-          <a href="javascript:;" class="page-link">1</a>
-        </li>
-        <li class="page-item">
-          <a href="javascript:;" class="page-link">»</a>
-        </li>
-        <!-- <li class="page-item"><a href="javascript:;" class="page-link">3</a></li>
-				<li class="page-item"><a href="javascript:;" class="page-link">4</a></li>
-				<li class="page-item"><a href="javascript:;" class="page-link">5</a></li>
-				<li class="page-item"><a href="javascript:;" class="page-link">6</a></li>
-				<li class="page-item"><a href="javascript:;" class="page-link">7</a></li>
-				<li class="page-item"><a href="javascript:;" class="page-link">»</a></li> -->
-      </ul>
-    </div>
-    <!-- END pagination -->
   </div>
-  <!-- END col-12 -->
 </div>
-<!-- END row -->

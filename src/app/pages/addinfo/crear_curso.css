@@ -1,0 +1,16 @@
+@import '~@yaireo/tagify/dist/tagify.css';
+.fixed-top {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #DEE2E6;
+    opacity: 1;
+  }
+
+  .nav-link.active {
+    font-weight: bold; /* Estilo de la sección activa */
+  }
+  
+  .nav-link.completed {
+    color: rgb(0, 87, 128); /* Estilo de la sección completada */
+  }

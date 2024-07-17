@@ -6,7 +6,8 @@ import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'settings-page',
-  templateUrl: './settings-page.html'
+  templateUrl: './settings-page.html',
+  styleUrls:['./settings-page.css'],
 })
 
 export class SettingsPageV1 implements OnInit {
@@ -21,6 +22,8 @@ export class SettingsPageV1 implements OnInit {
 	alertMessage = '';
 	selectedFile: File | null = null;
 	userProfile: any;
+	fotoData: any ={fotoperfil:''}
+	user_Id: string;
   
   constructor(public appSettings: AppSettings, private authService: AuthService,private router: Router) {
   }
@@ -32,6 +35,7 @@ export class SettingsPageV1 implements OnInit {
 		this.userName = localStorage.getItem('userName');
 		this.userLastName = localStorage.getItem('userLastName');
 		this.userEmail = localStorage.getItem('userEmail');
+		this.user_Id = localStorage.getItem("user_Id");
 		//localStorage.setItem('userProfilePic', response.user.profilePic);
 		this.userProfile = localStorage.getItem('userProfilePic');
 		
@@ -102,8 +106,41 @@ export class SettingsPageV1 implements OnInit {
 			}
 		});
   }
+  validateFile(file: File, allowedTypes: string[]): boolean {
+    return allowedTypes.includes(file.type);
+  }
+
+  submitPhoto(fPhoto: NgForm) {
+    const userId = localStorage.getItem("user_Id");
+
+    if (!userId) {
+      this.alertMessage = 'No se encontró el email del usuario.';
+      return;
+    }
+
+    if (this.fotoData.fotoperfil instanceof File) {
+      if (this.validateFile(this.fotoData.fotoperfil, ['image/jpeg'])) {
+        const fileExtension = this.fotoData.fotoperfil.name.split('.').pop();
+        const fileName = `${userId}.${fileExtension}`;
+        this.uploadFile(this.fotoData.fotoperfil, fileName).then(
+          () => {
+            this.alertMessage = 'Imagen de perfil guardada exitosamente.';
+          },
+          (error) => {
+            console.error('Error al subir la imagen de perfil:', error);
+            this.alertMessage = 'Error al guardar la imagen de perfil. Inténtalo de nuevo.';
+          }
+        );
+      } else {
+        this.alertMessage = 'Archivo en otro formato. La imagen de perfil debe ser JPG.';
+      }
+    } else {
+      this.alertMessage = 'Por favor, selecciona un archivo para subir.';
+    }
+  }
 
   formSubmit(f: NgForm) {
+
 	const formData = f.value;
 
 	// Verificar si hay campos vacíos
@@ -131,27 +168,40 @@ export class SettingsPageV1 implements OnInit {
 		}
 	}
 
-	onFileSelected(event: any) {
-		this.selectedFile = event.target.files[0] as File;
-	}
-	
-	submitPhoto(f: NgForm) {
-		if (!this.selectedFile) {
-			this.showErrorAlert('No se ha seleccionado ningún archivo.');
-			return;
-		}
-	
-		this.authService.uploadProfilePic(this.selectedFile).subscribe(
+
+
+
+	uploadFile(file: File, fileName: string): Promise<any> {
+		return new Promise((resolve, reject) => {
+		  this.authService.uploadDoc(file).subscribe(
 			response => {
-				this.showSuccessAlert('Imagen de perfil subida correctamente');
+			  console.log(`Archivo ${fileName} subido con éxito.`+ response);
+			  resolve(fileName);
 			},
 			error => {
-				console.error('Error al subir la imagen de perfil:', error);
-				this.showErrorAlert('Error al subir la imagen de perfil.');
+			  // console.error(`Error al subir archivo ${fileName}:`, error);
+			  // reject(error);
 			}
-		);
-	}
-
+		  );
+		});
+	  }
+	
+	  onFileChange(event: any, field: string, fileName: string) {
+		const input = event.target as HTMLInputElement;
+		if (input.files && input.files.length > 0) {
+		  const file = input.files[0];
+		  if (file instanceof File) {
+			const fileExtension = file.name.split('.').pop();
+			const finalFileName = `${fileName}.${fileExtension}`;
+			const newFile = new File([file], finalFileName, { type: file.type });
+			this.fotoData[field] = newFile;
+			this.fotoData[`${field}Nombre`] = finalFileName; // Guardar nombre del archivo
+			// this.saveToLocalStorage();
+		  } else {
+			console.error('El archivo seleccionado no es válido.');
+		  }
+		}
+	  }
 	
 
 showErrorAlert(message: string) {

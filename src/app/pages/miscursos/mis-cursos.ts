@@ -1,19 +1,25 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../../components/auth/auth.service";
+import { Router } from "@angular/router";
+import { Curso } from "../vercursos/curso.model";
 
 @Component({
   selector: "mis-cursos",
   templateUrl: "./mis-cursos.html",
+  styleUrls: ["./mis-cursos.css"],
 })
 export class MisCursosPage implements OnInit {
+  cursosInscritos: Curso[] = [];
   user_Id: string;
-  cursosInscritos: any[] = [];
+  terminoBusqueda: string = "";
+  showError: boolean = false;
+  showSuccess: boolean = false;
+  alertMessage: string = "";
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.user_Id = localStorage.getItem("user_Id");
-    this.getUserIdFromLocalStorage();
     if (this.user_Id) {
       this.getEnrolledCursos(this.user_Id);
     } else {
@@ -21,44 +27,85 @@ export class MisCursosPage implements OnInit {
     }
   }
 
-  getUserIdFromLocalStorage() {
-    const user = JSON.parse(localStorage.getItem("user") || "{}");
-    this.user_Id = user._id;
-  }
-
-  enrollCurso(cursoId: string) {
-    if (this.user_Id) {
-      this.authService.enrollUserInCurso(this.user_Id, cursoId).subscribe(
-        (response) => {
-          console.log("Usuario inscrito en curso:", response);
-          this.getEnrolledCursos(this.user_Id); // Actualizar la lista de cursos inscritos después de la inscripción
-        },
-        (error) => {
-          console.error("Error al inscribir usuario en curso:", error);
-        }
-      );
-    }
-  }
-
   getEnrolledCursos(userId: string) {
     this.authService.getEnrolledCursos(userId).subscribe(
       (response) => {
-        this.cursosInscritos = response.cursos;
-        console.log("Cursos inscritos del usuario:", this.cursosInscritos);
+        const cursoIds = response.cursosInscritos;
+
+        cursoIds.forEach((cursoId: string) => {
+          this.authService.getCursoById(cursoId).subscribe(
+            (curso) => {
+              const iconoUrl = `http://localhost:3000/uploads/${encodeURIComponent(
+                curso.iconocursoNombre
+              )}`;
+              console.log("URL del icono del curso:", iconoUrl);
+              curso.iconocursoNombre = iconoUrl; // Asegura que el nombre de la imagen esté completo
+
+              this.cursosInscritos.push(curso);
+            },
+            (error) => {
+              console.error("Error al obtener los detalles del curso:", error);
+            }
+          );
+        });
       },
       (error) => {
         console.error("Error al obtener cursos inscritos:", error);
       }
     );
   }
+
+  // buscarCursos(): void {
+  //   if (this.terminoBusqueda.trim() === "") {
+  //     this.user_Id = localStorage.getItem("user_Id");
+  //     this.getEnrolledCursos(this.user_Id);
+  //   } else {
+  //     this.cursosInscritos = this.cursosInscritos.filter(cursosInscritos =>
+  //       cursosInscritos.nombre_curso.toLowerCase().includes(this.terminoBusqueda.toLowerCase())
+  //     );
+  //   }
+  // }
+
+  buscarCursos(): void {
+    if (this.terminoBusqueda.trim() === "") {
+      // Limpiar todos los cursos en pantalla
+      this.cursosInscritos = [];
+  
+      // Obtener de nuevo todos los cursos inscritos
+      this.user_Id = localStorage.getItem("user_Id");
+      this.getEnrolledCursos(this.user_Id);
+    } else {
+      // Filtrar los cursos según el término de búsqueda
+      this.cursosInscritos = this.cursosInscritos.filter(cursosInscritos =>
+        cursosInscritos.nombre_curso.toLowerCase().includes(this.terminoBusqueda.toLowerCase())
+      );
+    }
+  }
+
+  realizarCurso(cursoId: string) {
+    this.router.navigate(["/primera_fase", cursoId]);
+    console.log("Realizando curso con ID:", cursoId);
+  }
+
+  showErrorAlert(message: string) {
+    this.alertMessage = message;
+    this.showError = true;
+    setTimeout(() => {
+      this.hideAlerts();
+    }, 5000);
+  }
+
+  showSuccessAlert(message: string) {
+    this.alertMessage = message;
+    this.showSuccess = true;
+    setTimeout(() => {
+      this.hideAlerts();
+    }, 5000);
+  }
+
+  hideAlerts() {
+    this.showError = false;
+    this.showSuccess = false;
+    this.alertMessage = "";
+  }
 }
-
-// import { Component } from '@angular/core';
-
-// @Component({
-// 	selector: 'extra-search-results',
-// 	templateUrl: './mis-cursos.html'
-// })
-
-// export class MisCursosPage {
-// }

@@ -16,7 +16,7 @@ export class TopMenuComponent implements OnInit {
 	constructor(private appMenuService: AppMenuService, private router: Router) { }
 	
 	ngOnInit() {
-		this.menus = this.appMenuService.getAppMenus();
+		this.menus = this.appMenuService.miMenu();
 	}
 	
 	ngAfterViewInit() {

@@ -4,6 +4,7 @@ import { slideToggle } from '../../composables/slideToggle.js';
 import { AppMenuService } from '../../service/app-menus.service';
 import { AppSettings } from '../../service/app-settings.service';
 import { AuthService } from '../../components/auth/auth.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'sidebar',
@@ -12,11 +13,12 @@ import { AuthService } from '../../components/auth/auth.service';
 
 export class SidebarComponent implements AfterViewChecked {
 	
-	
+	icono: string = ''; 
 	menus: any[] = [];
 	userName: string;
   	userLastName: string;
 	userProfile: string;
+	user_Id: string;
 
   @ViewChild('sidebarScrollbar', { static: false }) private sidebarScrollbar: ElementRef;
 	@Output() appSidebarMinifiedToggled = new EventEmitter<boolean>();
@@ -305,20 +307,58 @@ export class SidebarComponent implements AfterViewChecked {
 		handleSidebarMenuToggle(submenusLvl2, expandTime);
 		
   }
+
+  getFile() {
+	if (this.user_Id) {
+	  const extensions = ['jpg'];
+	  let perfil = '';
+  
+	  const checkFileExists = async (url: string) => {
+		try {
+		  const response = await this.http.head(url, { observe: 'response' }).toPromise();
+		  return response.status === 200;
+		} catch {
+		  return false;
+		}
+	  };
+  
+	  (async () => {
+		for (const ext of extensions) {
+		  const url = `http://localhost:3000/uploads/${encodeURIComponent(this.user_Id)}.${ext}`;
+		  if (await checkFileExists(url)) {
+			perfil = url;
+			break;
+		  }
+		}
+  
+		if (perfil === '') {
+		  perfil = `http://localhost:3000/uploads/${encodeURIComponent('perfil')}.jpg`;
+		}
+  
+		this.icono = perfil;
+	  })();
+	}
+  }
+  
+  urlExists(url: string): boolean {
+	return true; 
+  }
   
   
   ngOnInit() {
-    this.menus = this.appMenuService.getAppMenus(); 
+    this.menus = this.appMenuService.miMenu(); 
     this.userName = localStorage.getItem('userName');
     this.userLastName = localStorage.getItem('userLastName');
 	this.userProfile = localStorage.getItem('userProfilePic');
+	this.user_Id = localStorage.getItem("user_Id");
+	this.getFile();
 
    // console.log('El nombre es: ' + this.userName);
   //  console.log('El apellido es: ' + this.userLastName);
   }
 
 
-  constructor(private eRef: ElementRef, public appSettings: AppSettings, private appMenuService: AppMenuService,private authService: AuthService) {
+  constructor(private eRef: ElementRef, public appSettings: AppSettings, private appMenuService: AppMenuService,private authService: AuthService,private http: HttpClient) {
     if (window.innerWidth <= 767) {
       this.mobileMode = true;
       this.desktopMode = false;

@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, Renderer2, OnDestroy } from '@a
 import { AppSettings } from '../../service/app-settings.service';
 import { AppMenuService } from '../../service/app-menus.service';
 import { AuthService } from '../auth/auth.service';
+import { HttpClient } from '@angular/common/http';
 
 declare var slideToggle: any;
 
@@ -11,10 +12,12 @@ declare var slideToggle: any;
 })
 export class HeaderComponent implements OnDestroy {
 
-		
+	icono: string = ''; 
 	menus: any[] = [];
 	userName: string;
   	userLastName: string;
+	userEmail: string;
+	user_Id: string;
 
   @Input() appSidebarTwo;
 	@Output() appSidebarEndToggled = new EventEmitter<boolean>();
@@ -50,18 +53,78 @@ export class HeaderComponent implements OnDestroy {
 
 
 	ngOnInit() {
-		this.menus = this.appMenuService.getAppMenus(); 
+		this.menus = this.appMenuService.miMenu(); 
 		this.userName = localStorage.getItem('userName');
 		this.userLastName = localStorage.getItem('userLastName');
-	
-		//console.log('El nombre es: ' + this.userName);
-		//console.log('El apellido es: ' + this.userLastName);
+		this.userLastName = localStorage.getItem('userLastName');
+		this.userEmail = localStorage.getItem('userEmail');
+		this.user_Id = localStorage.getItem("user_Id");
+
+		this.getFile();
 	  }
 
+
+	//   getFile() {
+	// 	if (this.user_Id) {
+	// 	  const extensions = ['png', 'jpg', 'jpeg']; 
+	  
+
+	// 	  let perfil = '';
+	// 	  for (const ext of extensions) {
+	// 		const url = `http://localhost:3000/uploads/${encodeURIComponent(this.user_Id)}.jpg`;
+	// 		if (this.urlExists(url)) { 
+	// 		  perfil = url;
+	// 		  break;
+	// 		}
+	// 	  }
+
+	// 	  if (perfil === '') {
+	// 		perfil = `http://localhost:3000/uploads/${encodeURIComponent(this.user_Id)}`;
+	// 	  }
+	  
+	// 	  this.icono = perfil;
+	// 	}
+	//   }
+	
+	getFile() {
+		if (this.user_Id) {
+		  const extensions = ['jpg'];
+		  let perfil = '';
+	  
+		  const checkFileExists = async (url: string) => {
+			try {
+			  const response = await this.http.head(url, { observe: 'response' }).toPromise();
+			  return response.status === 200;
+			} catch {
+			  return false;
+			}
+		  };
+	  
+		  (async () => {
+			for (const ext of extensions) {
+			  const url = `http://localhost:3000/uploads/${encodeURIComponent(this.user_Id)}.${ext}`;
+			  if (await checkFileExists(url)) {
+				perfil = url;
+				break;
+			  }
+			}
+	  
+			if (perfil === '') {
+			  perfil = `http://localhost:3000/uploads/${encodeURIComponent('perfil')}.jpg`;
+			}
+	  
+			this.icono = perfil;
+		  })();
+		}
+	  }
+
+	  urlExists(url: string): boolean {
+		return true; 
+	  }
 
 	  cerrarSesion() {
 		this.authService.logout();
 	  }
-  constructor(private renderer: Renderer2, public appSettings: AppSettings,private appMenuService: AppMenuService, private authService: AuthService) {
+  constructor(private renderer: Renderer2, public appSettings: AppSettings,private appMenuService: AppMenuService, private authService: AuthService, private http: HttpClient) {
   }
 }

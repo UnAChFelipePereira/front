@@ -1,4 +1,5 @@
 @import '~@yaireo/tagify/dist/tagify.css';
+
 .fixed-top {
     position: sticky;
     top: 0;
