@@ -1,5 +1,5 @@
 <!-- BEGIN #header -->
-<div id="header" class="app-header" [attr.data-bs-theme]="this.appSettings.appHeaderInverse ? 'dark' : ''">
+<div id="header" class="app-header" [attr.data-bs-theme]="this.appSettings.appHeaderInverse ? 'dark' : ''" style="background-color: #262d33;">
   <!-- BEGIN navbar-header -->
   <div class="navbar-header">
     <button type="button" class="navbar-mobile-toggler" *ngIf="this.appSidebarTwo" (click)="toggleAppSidebarEndMobile()">
@@ -8,7 +8,7 @@
       <span class="icon-bar"></span>
     </button>
     <!-- <a href="/" class="navbar-brand"><span class="navbar-logo"></span> <b>AULA</b> VIRTUAL</a> -->
-    <a href="/" class="navbar-brand">
+    <a href="/" class="navbar-brand" style="color: white;">
       <img src="/assets/img/subir/logo-unach-fin.jpg" style="margin-right: 10px;" />
       <b >AULA</b> VIRTUAL
     </a>
@@ -89,15 +89,15 @@
     
     
     <div class="navbar-item navbar-user dropdown">
-      <a href="javascript:;" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
+      <a href="javascript:;" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" style="color: white;" >
         <img [src]="icono" />
         <span>
-					<span class="d-none d-md-inline"><small>{{userName}} {{userLastName}}</small></span>
-					<b class="caret"></b>
+					<span class="d-none d-md-inline" style="color: white;"><small>{{userName}} {{userLastName}}</small></span>
+					<b class="caret" ></b>
 				</span>
       </a>
-      <div class="dropdown-menu dropdown-menu-end me-1">
-				<a href="javascript:;" (click)="cerrarSesion()"  class="dropdown-item">Cerrar sesión</a>
+      <div class="dropdown-menu dropdown-menu-end me-1" style="background-color: #262d33;">
+				<a href="javascript:;" (click)="cerrarSesion()"  class="dropdown-item" style="color: white;">Cerrar sesión</a>
 			</div>
     </div>
     <div class="navbar-divider d-none d-md-block" *ngIf="this.appSidebarTwo"></div>

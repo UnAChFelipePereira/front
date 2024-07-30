@@ -5,7 +5,7 @@ import {
   HttpHeaders,
 } from "@angular/common/http";
 import { Observable, catchError, last, tap, throwError } from "rxjs";
-import { CanActivate, Router } from "@angular/router";
+import { CanActivate,ActivatedRouteSnapshot, RouterStateSnapshot, Router } from "@angular/router";
 import { Curso } from "../../pages/vercursos/curso.model";
 import { ProgresoEstudiantes } from "../../pages/progreso/progreso.model";
 
@@ -41,13 +41,15 @@ export class AuthService implements CanActivate {
     name: string,
     lastname: string,
     email: string,
-    password: string
+    password: string,
+    rol: string
   ): Observable<any> {
     return this.http.post<any>(`${this.apiUrlregister}`, {
       name,
       email,
       lastname,
       password,
+      rol
     });
   }
 
@@ -392,18 +394,52 @@ export class AuthService implements CanActivate {
     return this.http.get<{ data: Curso[] }>(`${this.baseCursos}`);
   }
 
+  activateAccount(token: string): Observable<any> {
+    return this.http.get<any>(`${this.baseCursos}/activate-account`, { params: { token } }).pipe(
+      catchError(this.handleErrors)
+    );
+  }
+
+  private handleErrors(error: HttpErrorResponse) {
+    let errorMessage = 'An unknown error occurred!';
+    if (error.error instanceof ErrorEvent) {
+      // Client-side error
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // Server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    return throwError(() => new Error(errorMessage));
+  }
+
+  // login(email: string, password: string): Observable<any> {
+  //   return this.http.post<any>(this.apiUrllogin, { email, password }).pipe(
+  //     tap((response) => {
+  //       localStorage.setItem('access_token', response.access_token);
+  //       localStorage.setItem('userEmail', response.user.email);
+  //       localStorage.setItem('userName', response.user.name);
+  //       localStorage.setItem('userLastName', response.user.lastname);
+  //     }),
+  //     catchError(this.handleError)
+  //   );
+  // }
+
   login(email: string, password: string): Observable<any> {
-    return this.http.post<any>(this.apiUrllogin, { email, password }).pipe(
-      tap((response) => {
-        // Almacenar el token en localStorage
-        localStorage.setItem("access_token", response.access_token);
-        // También podrías almacenar otros datos del usuario si los necesitas
-        localStorage.setItem("userEmail", response.user.email);
-        localStorage.setItem("userName", response.user.name);
-        localStorage.setItem("userLastName", response.user.lastname);
+    return this.http.post(`${this.apiUrllogin}`, { email, password }).pipe(
+      tap((response: any) => {
+        localStorage.setItem('userEmail', response.user.email);
+        localStorage.setItem('userName', response.user.name);
+        localStorage.setItem('userLastName', response.user.lastname);
+        localStorage.setItem('access_token', response.access_token);
+        localStorage.setItem('user', JSON.stringify(response.user));
       })
     );
   }
+
+  private handleError(error: HttpErrorResponse) {
+    return throwError(() => error);
+  }
+
   perfil(
     email: string,
     name: string,
@@ -462,15 +498,25 @@ export class AuthService implements CanActivate {
     this.router.navigate(["/login"]);
   }
 
-  canActivate(): boolean {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     // Obtener el token de acceso del almacenamiento local
     const token = localStorage.getItem("access_token");
 
     // Verificar si el token existe y no es nulo ni vacío
     if (token && token.trim() !== "") {
-      // Si el token existe, permite el acceso a la ruta protegida
+      // Si el token existe, verificar el rol del usuario si se ha proporcionado un rol esperado
+      const expectedRole = route.data.expectedRole;
+      if (expectedRole) {
+        const currentUserRole = this.getCurrentUserRole();
+        if (currentUserRole !== expectedRole) {
+          // Si el rol del usuario no coincide con el rol esperado, redirigir y retornar falso
+          console.log(`Acceso denegado. Rol esperado: ${expectedRole}, Rol del usuario: ${currentUserRole}`);
+          this.router.navigate(["/inicio"]);
+          return false;
+        }
+      }
+      // Si no se ha proporcionado un rol esperado o el rol coincide, permitir el acceso
       console.log("Usuario autenticado. Permitiendo acceso.");
-      console.log(token);
       return true;
     } else {
       // Si no hay token, redirigir al usuario al componente de login y retornar falso
@@ -585,16 +631,17 @@ export class AuthService implements CanActivate {
     return this.http.get<any>(this.buscarDatosCursos);
   }
 
-  // uploadDoc(iconocurso:string, archivo_pt1:string, archivo_pt2:string,archivo_pt3:string, archivo_pt4:string,archivo_pt5:string): Observable<any> {
-  //   const formData = new FormData();
-  //   formData.append("profilePic", file);
-
-  //   return this.http.post<any>(`${this.subir}`, formData);
-  // }
 
   uploadDoc(file: File): Observable<any> {
     const formData = new FormData();
     formData.append('file', file);
     return this.http.post<any>(`${this.subir}`, formData);
   }
+
+
+  getCurrentUserRole(): string {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    return user.rol || 'estudiante';
+  }
+
 }

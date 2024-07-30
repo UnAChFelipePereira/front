@@ -11,12 +11,14 @@
 		<div class="login-header">
 			<div class="brand">
 				<div class="d-flex align-items-center">
-				  <span class="logo"></span> <b>AULA</b> VIRTUAL
+				  <span src="/assets/img/subir/logo-unach-fin.jpg"></span> <b>AULA</b> VIRTUAL
 				</div>
 				<small class="color-text: white">Universidad Adventista De Chile</small>
 			  </div>
 			<div class="icon">
 				<i class="fa fa-lock"></i>
+				<!-- <img src="/assets/img/subir/logo.png" style="width: 80px; height: 80px; opacity: 1;"  /> -->
+
 			</div>
 		</div>
 		<!-- END login-header -->
@@ -39,17 +41,17 @@
 					<div> <a routerLink="/forgot-password">Recuperar contraseña</a></div>
 				  </div>
 				  
-				  <div class="form-check mb-20px">
+				  <!-- <div class="form-check mb-20px">
 					<input class="form-check-input border-0" type="checkbox" value="1" id="rememberMe" />
 					<label class="form-check-label fs-13px" for="rememberMe">
 					  Recordarme
 					</label>
-				  </div>
+				  </div> -->
 				  <div class="alert" role="alert" [ngClass]="{'alert-danger': showError, 'alert-success': showSuccess}">
 					{{ alertMessage }}
 				  </div>
 				  <div class="mb-20px">
-					<button type="submit" class="btn btn-theme d-block w-100 h-45px btn-lg">Iniciar Sesión</button>
+					<button type="submit" class="btn btn-theme d-block w-100 h-45px btn-lg" style="background-color: #003a6c;">Iniciar Sesión</button>
 				  </div>
 				  <div>
 					¿Aún no tienes cuenta? Has click <a routerLink="/register">aquí</a> para registrarte.

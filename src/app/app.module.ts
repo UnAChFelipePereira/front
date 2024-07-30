@@ -148,7 +148,7 @@ import { RegisterV2Page }           from './pages/register/register-v3/register-
 import { RegisterV3Page }           from './pages/register/register-v3/register-v3';
 import { ForgotV1Page }           from './pages/forgotPassword/forgot-password-v1';
 import { ResetPasswordV1Page } from './pages/resetPassword/resetPassword-v1';
-
+import { Activate } from './pages/register/register-v3/activate';
 
 //cursos
 
@@ -173,7 +173,7 @@ import { ProgresoEstudiantes } from './pages/progreso/progreso_estudiante';
 
 
 import { InicioPage } from './pages/inicio/Inicio';
-
+import { RoleBasedAccessDirective } from './directives/role-based-access.directive';
 // Helper
 import { HelperCssPage }            from './pages/helper/helper-css/helper-css';
 
@@ -181,14 +181,10 @@ import { HelperCssPage }            from './pages/helper/helper-css/helper-css';
 import { ErrorPage }                from './pages/error/error';
 
 
-
-
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
+    RoleBasedAccessDirective,
     HeaderComponent,
     SidebarComponent,
     SidebarRightComponent,
@@ -290,6 +286,7 @@ import { ErrorPage }                from './pages/error/error';
     RegisterV3Page,
     ForgotV1Page,
     ResetPasswordV1Page,
+    Activate,
     SettingsPageV1,
 
     InicioPage,
